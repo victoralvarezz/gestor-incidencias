@@ -1,13 +1,36 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>incidencias</ion-title>
+
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Incidencias</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">incidencias</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+
+  <h1>Listado de incidencias</h1>
+
+  <ion-list>
+
+    @for (incidencia of servicio.incidencias(); track incidencia.id) {
+
+      <ion-item>
+
+        <ion-label>
+          <h2>{{ incidencia.titulo }}</h2>
+          <p>{{ incidencia.descripcion }}</p>
+          <p>Prioridad: {{ incidencia.prioridad }}</p>
+        </ion-label>
+
+        <ion-badge
+          slot="end"
+          [color]="incidencia.estado === 'Resuelta' ? 'success' : 'warning'">
+          {{ incidencia.estado }}
+        </ion-badge>
+
+      </ion-item>
+
+    }
+
+  </ion-list>
+
 </ion-content>

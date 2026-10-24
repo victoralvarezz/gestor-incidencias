@@ -1,26 +1,38 @@
+
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [
+
   {
     path: '',
-    redirectTo: 'folder/Inbox',
-    pathMatch: 'full',
+    redirectTo: 'pages/dashboard',
+    pathMatch: 'full'
   },
+
   {
-    path: 'folder/:folder',
+    path: 'pages/dashboard',
     loadComponent: () =>
-      import('./folder/folder.page').then((m) => m.FolderPage),
+      import('./pages/dashboard/dashboard.page')
+        .then(m => m.DashboardPage)
   },
+
   {
-    path: 'dashboard',
-    loadComponent: () => import('./pages/dashboard/dashboard.page').then( m => m.DashboardPage)
+    path: 'pages/incidencias',
+    loadComponent: () =>
+      import('./pages/incidencias/incidencias.page')
+        .then(m => m.IncidenciasPage)
   },
+
   {
-    path: 'incidencias',
-    loadComponent: () => import('./pages/incidencias/incidencias.page').then( m => m.IncidenciasPage)
+    path: 'pages/nueva-incidencia',
+    loadComponent: () =>
+      import('./pages/nueva-incidencia/nueva-incidencia.page')
+        .then(m => m.NuevaIncidenciaPage)
   },
+
   {
-    path: 'nueva-incidencia',
-    loadComponent: () => import('./pages/nueva-incidencia/nueva-incidencia.page').then( m => m.NuevaIncidenciaPage)
-  },
+    path: '**',
+    redirectTo: 'pages/dashboard'
+  }
+
 ];

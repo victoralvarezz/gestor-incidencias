@@ -1,19 +1,37 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular';
+
+import { Component, inject } from '@angular/core';
+
+import {
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonContent,
+  IonList,
+  IonItem,
+  IonLabel,
+  IonBadge
+} from '@ionic/angular';
+
+import { IncidenciasService } from '../../services/incidencias.service';
 
 @Component({
   selector: 'app-incidencias',
   templateUrl: './incidencias.page.html',
   styleUrls: ['./incidencias.page.scss'],
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  standalone: true,
+  imports: [
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonContent,
+    IonList,
+    IonItem,
+    IonLabel,
+    IonBadge
+  ]
 })
-export class IncidenciasPage implements OnInit {
+export class IncidenciasPage {
 
-  constructor() { }
-
-  ngOnInit() {
-  }
+  readonly servicio = inject(IncidenciasService);
 
 }
