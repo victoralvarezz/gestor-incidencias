@@ -52,4 +52,24 @@ export class IncidenciasService {
     this.incidencias().filter(i => i.estado === 'Resuelta').length
   );
 
+  // Añadir una nueva incidencia
+  agregarIncidencia(
+    datos: Pick<Incidencia, 'titulo' | 'descripcion' | 'prioridad'>
+  ): void {
+
+    const lista = this.incidencias();
+
+    const nuevoId = Math.max(0, ...lista.map(i => i.id)) + 1;
+
+    const nueva: Incidencia = {
+      id: nuevoId,
+      titulo: datos.titulo,
+      descripcion: datos.descripcion,
+      prioridad: datos.prioridad,
+      estado: 'Pendiente'
+    };
+
+    this.incidencias.update(actuales => [...actuales, nueva]);
+  }
+
 }
