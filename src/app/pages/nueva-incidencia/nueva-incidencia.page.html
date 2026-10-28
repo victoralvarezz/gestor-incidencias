@@ -1,0 +1,86 @@
+
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start"><ion-menu-button></ion-menu-button></ion-buttons>
+    <ion-title>Nueva incidencia</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <div class="contenedor">
+
+    <h1>Registrar nueva incidencia</h1>
+    <p>Completa los datos para comunicar un problema.</p>
+
+    <form [formGroup]="formulario" (ngSubmit)="guardar()">
+
+      <ion-list>
+
+        <!-- TITULO -->
+        <ion-item>
+          <ion-input
+            label="Título"
+            labelPlacement="stacked"
+            placeholder="Ej. Ordenador averiado"
+            formControlName="titulo">
+          </ion-input>
+        </ion-item>
+
+        @if (formulario.controls.titulo.touched &&
+             formulario.controls.titulo.invalid) {
+          <ion-note color="danger" role="alert">
+            El título debe tener al menos 3 caracteres.
+          </ion-note>
+        }
+
+        <!-- DESCRIPCION -->
+        <ion-item>
+          <ion-textarea
+            label="Descripción"
+            labelPlacement="stacked"
+            placeholder="Explica qué ha ocurrido"
+            formControlName="descripcion"
+            [autoGrow]="true"
+            [rows]="3">
+          </ion-textarea>
+        </ion-item>
+
+        @if (formulario.controls.descripcion.touched &&
+             formulario.controls.descripcion.invalid) {
+          <ion-note color="danger" role="alert">
+            La descripción debe tener al menos 10 caracteres.
+          </ion-note>
+        }
+
+        <!-- PRIORIDAD -->
+        <ion-item>
+          <ion-select
+            label="Prioridad"
+            labelPlacement="stacked"
+            formControlName="prioridad">
+
+            <ion-select-option value="Baja">Baja</ion-select-option>
+            <ion-select-option value="Media">Media</ion-select-option>
+            <ion-select-option value="Alta">Alta</ion-select-option>
+
+          </ion-select>
+        </ion-item>
+
+      </ion-list>
+
+      <ion-button type="submit" expand="block">
+        Guardar incidencia
+      </ion-button>
+
+      @if (guardado()) {
+        <ion-note color="success" role="status">
+          Incidencia guardada correctamente.
+        </ion-note>
+      }
+
+    </form>
+
+  </div>
+
+</ion-content>

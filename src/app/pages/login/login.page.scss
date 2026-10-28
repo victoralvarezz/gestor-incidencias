@@ -1,0 +1,24 @@
+.contenedor {
+  max-width: 420px;
+  margin: 60px auto;
+}
+
+form {
+  padding: 24px;
+  border-radius: 12px;
+  background: var(--ion-card-background, #fff);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+ion-note {
+  display: block;
+  margin: 8px 12px;
+}
+
+ion-button {
+  margin-top: 20px;
+}
+
+.ayuda {
+  margin-top: 20px;
+}

@@ -1,50 +1,57 @@
-import { TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { provideRouter, Router, RouterLink } from '@angular/router';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
+import { describe, beforeEach, afterEach, it, expect } from 'vitest';
 
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
+
+  let component: AppComponent;
+  let fixture: ComponentFixture<AppComponent>;
+
   beforeEach(async () => {
+    sessionStorage.setItem('gestorUsuario', 'alumno');
     await TestBed.configureTestingModule({
       imports: [AppComponent],
       providers: [provideRouter([])]
     }).compileComponents();
+
+    fixture = TestBed.createComponent(AppComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
   });
 
+  afterEach(() => sessionStorage.removeItem('gestorUsuario'));
+
+  // Comprobar que se crea la aplicación
   it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
+    expect(component).toBeTruthy();
   });
 
-  it('should have menu labels', async () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    // ion-label is a scoped Stencil component whose slot content is relocated
-    // asynchronously, so wait for hydration before reading textContent (ROU-10799).
-    await fixture.whenStable();
+  // Comprobar las tres opciones del menú
+  it('should have menu labels', () => {
     const app = fixture.nativeElement;
-    const menuItems = app.querySelectorAll('ion-label');
-    expect(menuItems.length).toEqual(12);
-    expect(menuItems[0].innerHTML).toContain('Inbox');
-    expect(menuItems[1].innerHTML).toContain('Outbox');
+    const labels = app.querySelectorAll('ion-label');
+
+    expect(labels.length).toBe(3);
+    expect(labels[0].textContent).toContain('Panel de control');
+    expect(labels[1].textContent).toContain('Incidencias');
+    expect(labels[2].textContent).toContain('Nueva incidencia');
   });
 
+  // Comprobar las rutas configuradas
   it('should have urls', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const app = fixture.nativeElement;
-    expect(app.querySelectorAll('ion-item').length).toEqual(12);
-    // Ionic applies the rendered href through its own async write queue, so
-    // reading the DOM attribute is flaky (FW-6264). Assert the routerLink
-    // binding directly, which resolves synchronously.
-    const router = TestBed.inject(Router);
-    const links = fixture.debugElement
-      .queryAll(By.directive(RouterLink))
-      .map((el) => el.injector.get(RouterLink));
-    expect(links.length).toEqual(6);
-    expect(router.serializeUrl(links[0].urlTree!)).toEqual('/folder/Inbox');
-    expect(router.serializeUrl(links[1].urlTree!)).toEqual('/folder/Outbox');
+    const menu = component as unknown as {
+      appPages: { url: string }[];
+    };
+
+    const urls = menu.appPages.map(pagina => pagina.url);
+
+    expect(urls).toEqual([
+      '/pages/dashboard',
+      '/pages/incidencias',
+      '/pages/nueva-incidencia'
+    ]);
   });
+
 });

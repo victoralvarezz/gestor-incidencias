@@ -1,0 +1,43 @@
+ion-content {
+  --background: #f4f7fb;
+}
+
+h1, .filtros, ion-list, p {
+  max-width: 1050px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.filtros {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 16px;
+
+  ion-item {
+    --background: white;
+    border-radius: 8px;
+  }
+}
+
+.estado {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sin-resultados {
+  padding: 20px;
+  text-align: center;
+}
+
+@media (max-width: 650px) {
+  .filtros {
+    grid-template-columns: 1fr;
+  }
+
+  .estado {
+    display: block;
+    min-width: 110px;
+  }
+}

@@ -1,0 +1,50 @@
+
+ion-content {
+  --background: #f4f7fb;
+}
+
+.contenedor {
+  max-width: 700px;
+  margin: 25px auto;
+}
+
+h1 {
+  font-size: 26px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+p {
+  color: #555;
+  margin-bottom: 25px;
+}
+
+form {
+  background: var(--ion-card-background, white);
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+ion-item {
+  margin-bottom: 15px;
+}
+
+ion-button {
+  margin-top: 25px;
+}
+
+ion-note {
+  display: block;
+  margin: 10px 12px;
+}
+
+@media (max-width: 600px) {
+  .contenedor {
+    margin: 8px auto;
+  }
+
+  form {
+    padding: 14px;
+  }
+}
