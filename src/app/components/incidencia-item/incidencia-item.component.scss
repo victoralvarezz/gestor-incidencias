@@ -1,0 +1,12 @@
+.estado {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+@media (max-width: 650px) {
+  .estado {
+    display: block;
+    min-width: 110px;
+  }
+}

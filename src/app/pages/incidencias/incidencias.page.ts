@@ -8,8 +8,6 @@ import {
   IonContent,
   IonList,
   IonItem,
-  IonLabel,
-  IonBadge,
   IonInput,
   IonSelect,
   IonSelectOption,
@@ -19,6 +17,7 @@ import {
 
 import { Incidencia, IncidenciasService } from '../../services/incidencias.service';
 import { AuthService } from '../../services/auth.service';
+import { IncidenciaItemComponent } from '../../components/incidencia-item/incidencia-item.component';
 
 @Component({
   selector: 'app-incidencias',
@@ -32,8 +31,7 @@ import { AuthService } from '../../services/auth.service';
     IonContent,
     IonList,
     IonItem,
-    IonLabel,
-    IonBadge,
+    IncidenciaItemComponent,
     IonInput,
     IonSelect,
     IonSelectOption,

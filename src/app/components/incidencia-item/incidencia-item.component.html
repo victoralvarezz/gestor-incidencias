@@ -1,0 +1,21 @@
+<ion-item>
+  <ion-label>
+    <h2>{{ incidencia.titulo }}</h2>
+    <p>{{ incidencia.descripcion }}</p>
+    <p>Prioridad: {{ incidencia.prioridad }}</p>
+  </ion-label>
+
+  <div slot="end" class="estado">
+    <ion-badge [color]="incidencia.estado === 'Resuelta' ? 'success' : incidencia.estado === 'En proceso' ? 'primary' : 'warning'">
+      {{ incidencia.estado }}
+    </ion-badge>
+    @if (puedeCambiarEstado) {
+      <ion-select aria-label="Cambiar estado de {{ incidencia.titulo }}" interface="popover"
+        [value]="incidencia.estado" (ionChange)="avisarCambio($event.detail.value)">
+        <ion-select-option value="Pendiente">Pendiente</ion-select-option>
+        <ion-select-option value="En proceso">En proceso</ion-select-option>
+        <ion-select-option value="Resuelta">Resuelta</ion-select-option>
+      </ion-select>
+    }
+  </div>
+</ion-item>

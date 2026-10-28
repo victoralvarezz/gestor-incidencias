@@ -1,4 +1,5 @@
 import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
 
 import {
   IonHeader,
@@ -8,15 +9,12 @@ import {
   IonGrid,
   IonRow,
   IonCol,
-  IonCard,
-  IonCardHeader,
-  IonCardTitle,
-  IonCardContent,
   IonButtons,
   IonMenuButton
 } from '@ionic/angular';
 
 import { IncidenciasService } from '../../services/incidencias.service';
+import { TarjetaResumenComponent } from '../../components/tarjeta-resumen/tarjeta-resumen.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -30,10 +28,7 @@ import { IncidenciasService } from '../../services/incidencias.service';
     IonGrid,
     IonRow,
     IonCol,
-    IonCard,
-    IonCardHeader,
-    IonCardTitle,
-    IonCardContent,
+    TarjetaResumenComponent,
     IonButtons,
     IonMenuButton
   ]
@@ -41,5 +36,10 @@ import { IncidenciasService } from '../../services/incidencias.service';
 export class DashboardPage {
 
   readonly servicio = inject(IncidenciasService);
+  private readonly router = inject(Router);
+
+  verIncidencias(): void {
+    this.router.navigateByUrl('/pages/incidencias');
+  }
 
 }

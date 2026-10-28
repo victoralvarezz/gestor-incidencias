@@ -15,36 +15,18 @@
     <ion-row>
 
       <ion-col size="12" sizeMd="4">
-        <ion-card>
-          <ion-card-header>
-            <ion-card-title>Total</ion-card-title>
-          </ion-card-header>
-          <ion-card-content>
-            <h2>{{ servicio.total() }}</h2>
-          </ion-card-content>
-        </ion-card>
+        <app-tarjeta-resumen titulo="Total" [cantidad]="servicio.total()"
+          (pulsada)="verIncidencias()"></app-tarjeta-resumen>
       </ion-col>
 
       <ion-col size="12" sizeMd="4">
-        <ion-card>
-          <ion-card-header>
-            <ion-card-title>Pendientes</ion-card-title>
-          </ion-card-header>
-          <ion-card-content>
-            <h2>{{ servicio.pendientes() }}</h2>
-          </ion-card-content>
-        </ion-card>
+        <app-tarjeta-resumen titulo="Pendientes" [cantidad]="servicio.pendientes()"
+          (pulsada)="verIncidencias()"></app-tarjeta-resumen>
       </ion-col>
 
       <ion-col size="12" sizeMd="4">
-        <ion-card>
-          <ion-card-header>
-            <ion-card-title>Resueltas</ion-card-title>
-          </ion-card-header>
-          <ion-card-content>
-            <h2>{{ servicio.resueltas() }}</h2>
-          </ion-card-content>
-        </ion-card>
+        <app-tarjeta-resumen titulo="Resueltas" [cantidad]="servicio.resueltas()"
+          (pulsada)="verIncidencias()"></app-tarjeta-resumen>
       </ion-col>
 
     </ion-row>

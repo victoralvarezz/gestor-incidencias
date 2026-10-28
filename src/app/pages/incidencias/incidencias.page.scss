@@ -20,12 +20,6 @@ h1, .filtros, ion-list, p {
   }
 }
 
-.estado {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
 .sin-resultados {
   padding: 20px;
   text-align: center;
@@ -34,10 +28,5 @@ h1, .filtros, ion-list, p {
 @media (max-width: 650px) {
   .filtros {
     grid-template-columns: 1fr;
-  }
-
-  .estado {
-    display: block;
-    min-width: 110px;
   }
 }
