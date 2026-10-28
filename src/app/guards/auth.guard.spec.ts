@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { ActivatedRoute, provideRouter, Router, UrlTree } from '@angular/router';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { authGuard } from './auth.guard';
+import { adminGuard, authGuard } from './auth.guard';
 import { AuthService } from '../services/auth.service';
 
 describe('authGuard', () => {
@@ -25,5 +25,19 @@ describe('authGuard', () => {
     const estado = TestBed.inject(Router).routerState.snapshot;
     const resultado = TestBed.runInInjectionContext(() => authGuard(ruta, estado));
     expect(resultado).toBe(true);
+  });
+
+  it('reserva el dashboard al administrador', () => {
+    const ruta = TestBed.inject(ActivatedRoute).snapshot;
+    const estado = TestBed.inject(Router).routerState.snapshot;
+    const comprobar = () => TestBed.runInInjectionContext(() => adminGuard(ruta, estado));
+    const router = TestBed.inject(Router);
+
+    expect(router.serializeUrl(comprobar() as UrlTree)).toBe('/login');
+    const auth = TestBed.inject(AuthService);
+    auth.iniciarSesion('alumno', '1234');
+    expect(router.serializeUrl(comprobar() as UrlTree)).toBe('/pages/incidencias');
+    auth.iniciarSesion('admin', '1234');
+    expect(comprobar()).toBe(true);
   });
 });

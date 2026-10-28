@@ -56,7 +56,7 @@ export class LoginPage {
 
     const datos = this.formulario.getRawValue();
     if (this.auth.iniciarSesion(datos.usuario, datos.contrasena)) {
-      this.router.navigateByUrl('/pages/dashboard');
+      this.router.navigateByUrl(this.auth.esAdministrador() ? '/pages/dashboard' : '/pages/incidencias');
     } else {
       this.error.set(true);
     }

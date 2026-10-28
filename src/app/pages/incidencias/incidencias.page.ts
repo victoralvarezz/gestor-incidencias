@@ -18,6 +18,7 @@ import {
 } from '@ionic/angular';
 
 import { Incidencia, IncidenciasService } from '../../services/incidencias.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-incidencias',
@@ -43,6 +44,7 @@ import { Incidencia, IncidenciasService } from '../../services/incidencias.servi
 export class IncidenciasPage {
 
   readonly servicio = inject(IncidenciasService);
+  readonly auth = inject(AuthService);
   readonly busqueda = signal('');
   readonly filtroEstado = signal('Todos');
   readonly filtroPrioridad = signal('Todas');
@@ -58,7 +60,8 @@ export class IncidenciasPage {
   });
 
   cambiarEstado(incidencia: Incidencia, valor: string | null | undefined): void {
-    if (valor === 'Pendiente' || valor === 'En proceso' || valor === 'Resuelta') {
+    if (this.auth.esAdministrador() &&
+      (valor === 'Pendiente' || valor === 'En proceso' || valor === 'Resuelta')) {
       this.servicio.cambiarEstado(incidencia.id, valor);
     }
   }

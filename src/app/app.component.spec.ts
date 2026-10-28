@@ -33,10 +33,15 @@ describe('AppComponent', () => {
     const app = fixture.nativeElement;
     const labels = app.querySelectorAll('ion-label');
 
-    expect(labels.length).toBe(3);
-    expect(labels[0].textContent).toContain('Panel de control');
-    expect(labels[1].textContent).toContain('Incidencias');
-    expect(labels[2].textContent).toContain('Nueva incidencia');
+    expect(labels.length).toBe(2);
+    expect(labels[0].textContent).toContain('Incidencias');
+    expect(labels[1].textContent).toContain('Nueva incidencia');
+  });
+
+  it('muestra el panel al administrador', () => {
+    component.auth.iniciarSesion('admin', '1234');
+    fixture.detectChanges();
+    expect(fixture.nativeElement.textContent).toContain('Panel de control');
   });
 
   // Comprobar las rutas configuradas

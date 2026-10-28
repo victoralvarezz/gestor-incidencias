@@ -53,12 +53,14 @@
           <ion-badge [color]="incidencia.estado === 'Resuelta' ? 'success' : incidencia.estado === 'En proceso' ? 'primary' : 'warning'">
             {{ incidencia.estado }}
           </ion-badge>
+          @if (auth.esAdministrador()) {
           <ion-select aria-label="Cambiar estado de {{ incidencia.titulo }}" interface="popover"
             [value]="incidencia.estado" (ionChange)="cambiarEstado(incidencia, $event.detail.value)">
             <ion-select-option value="Pendiente">Pendiente</ion-select-option>
             <ion-select-option value="En proceso">En proceso</ion-select-option>
             <ion-select-option value="Resuelta">Resuelta</ion-select-option>
           </ion-select>
+          }
         </div>
 
       </ion-item>

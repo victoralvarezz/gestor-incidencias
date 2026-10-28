@@ -13,7 +13,17 @@ describe('AuthService', () => {
     expect(auth.estaAutenticado()).toBe(false);
     expect(auth.iniciarSesion('alumno', '1234')).toBe(true);
     expect(auth.estaAutenticado()).toBe(true);
+    expect(auth.rol()).toBe('usuario');
+    expect(auth.esAdministrador()).toBe(false);
     expect(sessionStorage.getItem('gestorUsuario')).toBe('alumno');
+  });
+
+  it('reconoce al administrador y recupera su sesión', () => {
+    const auth = new AuthService();
+    expect(auth.iniciarSesion('admin', '1234')).toBe(true);
+    expect(auth.rol()).toBe('administrador');
+    expect(auth.esAdministrador()).toBe(true);
+    expect(new AuthService().esAdministrador()).toBe(true);
   });
 
   it('recupera la sesión y la elimina al salir', () => {
