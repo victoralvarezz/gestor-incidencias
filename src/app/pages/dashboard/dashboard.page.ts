@@ -69,4 +69,9 @@ export class DashboardPage {
     this.exportacion.descargar('incidencias.csv', new Blob([csv], { type: 'text/csv;charset=utf-8' }));
   }
 
+  abrirInforme(): void {
+    if (!this.auth.esAdministrador()) return;
+    this.exportacion.abrirInforme(this.servicio.incidencias());
+  }
+
 }
