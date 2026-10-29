@@ -7,3 +7,47 @@ h1 {
   font-size: 24px;
   font-weight: bold;
 }
+
+.grafico {
+  max-width: 800px;
+  margin: 24px auto;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+}
+
+.fila-grafico {
+  display: grid;
+  grid-template-columns: 90px minmax(0, 1fr) 24px;
+  align-items: center;
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.pista {
+  height: 24px;
+  background: #e9eef5;
+  border-radius: 4px;
+}
+
+.barra {
+  height: 100%;
+  background: #d99020;
+  border-radius: 4px;
+}
+
+.barra.en-proceso { background: #3880ff; }
+.barra.resuelta { background: #2d9b69; }
+
+.acciones {
+  max-width: 800px;
+  margin: 16px auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+@media (max-width: 480px) {
+  .grafico { padding: 12px; }
+  .fila-grafico { grid-template-columns: 75px minmax(0, 1fr) 20px; gap: 8px; font-size: 13px; }
+}

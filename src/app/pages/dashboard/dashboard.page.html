@@ -32,4 +32,23 @@
     </ion-row>
   </ion-grid>
 
+  <section class="grafico" aria-label="Gráfico de incidencias por estado">
+    <h2>Incidencias por estado</h2>
+    @for (barra of grafico(); track barra.estado) {
+      <div class="fila-grafico">
+        <span>{{ barra.estado }}</span>
+        <div class="pista">
+          <div class="barra" [class.en-proceso]="barra.estado === 'En proceso'"
+            [class.resuelta]="barra.estado === 'Resuelta'"
+            [style.width.%]="barra.porcentaje"></div>
+        </div>
+        <strong>{{ barra.cantidad }}</strong>
+      </div>
+    }
+  </section>
+
+  <div class="acciones">
+    <ion-button (click)="exportarCsv()">Descargar CSV</ion-button>
+  </div>
+
 </ion-content>

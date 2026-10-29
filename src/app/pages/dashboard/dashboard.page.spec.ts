@@ -2,6 +2,7 @@ import { describe, beforeEach, it, expect, vi } from 'vitest';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter, Router } from '@angular/router';
 import { DashboardPage } from './dashboard.page';
+import { IncidenciasService } from '../../services/incidencias.service';
 
 describe('DashboardPage', () => {
   let component: DashboardPage;
@@ -27,5 +28,16 @@ describe('DashboardPage', () => {
     const navegar = vi.spyOn(TestBed.inject(Router), 'navigateByUrl');
     tarjetas[0].querySelector('ion-button').click();
     expect(navegar).toHaveBeenCalledWith('/pages/incidencias');
+  });
+
+  it('actualiza el gráfico al cambiar el estado de una incidencia', () => {
+    const servicio = TestBed.inject(IncidenciasService);
+    expect(component.grafico().map(barra => barra.cantidad)).toEqual([1, 1, 1]);
+
+    servicio.cambiarEstado(1, 'Resuelta');
+    fixture.detectChanges();
+
+    expect(component.grafico().map(barra => barra.cantidad)).toEqual([0, 1, 2]);
+    expect(fixture.nativeElement.querySelector('.grafico').textContent).toContain('Resuelta');
   });
 });
