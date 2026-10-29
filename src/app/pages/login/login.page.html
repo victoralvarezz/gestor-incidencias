@@ -11,14 +11,14 @@
 
     <form [formGroup]="formulario" (ngSubmit)="entrar()">
       <ion-item>
-        <ion-input label="Usuario" labelPlacement="stacked" formControlName="usuario"></ion-input>
+        <ion-input label="Usuario" labelPlacement="stacked" autocomplete="username" formControlName="usuario"></ion-input>
       </ion-item>
       @if (formulario.controls.usuario.touched && formulario.controls.usuario.invalid) {
         <ion-note color="danger" role="alert">Introduce el usuario.</ion-note>
       }
 
       <ion-item>
-        <ion-input label="Contraseña" labelPlacement="stacked" type="password" formControlName="contrasena"></ion-input>
+        <ion-input label="Contraseña" labelPlacement="stacked" type="password" autocomplete="current-password" formControlName="contrasena"></ion-input>
       </ion-item>
       @if (formulario.controls.contrasena.touched && formulario.controls.contrasena.invalid) {
         <ion-note color="danger" role="alert">Introduce la contraseña.</ion-note>

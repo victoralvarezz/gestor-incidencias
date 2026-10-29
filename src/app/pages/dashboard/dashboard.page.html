@@ -52,4 +52,39 @@
     <ion-button (click)="abrirInforme()">Informe PDF</ion-button>
   </div>
 
+  <section class="fuentes-demo" aria-labelledby="titulo-fuentes">
+    <h2 id="titulo-fuentes">Fuentes de datos de demostración</h2>
+    <p>Ejemplo simulado: se cargan dos archivos JSON de forma asíncrona. No hay servidor SQL ni base de datos NoSQL real.</p>
+    <ion-button (click)="cargarFuentesDemo()" [disabled]="cargandoDemo()">
+      Cargar fuentes simuladas
+    </ion-button>
+    @if (cargandoDemo()) {
+      <p role="status">Cargando datos…</p>
+    }
+    @if (errorDemo()) {
+      <p role="alert">{{ errorDemo() }}</p>
+    }
+    @if (filasDemo().length || documentosDemo().length) {
+      <div class="fuentes-grid" role="status">
+        <div>
+          <h3>SQL/REST simulado: filas</h3>
+          <ul>
+            @for (fila of filasDemo(); track fila.id) {
+              <li>#{{ fila.id }} {{ fila.titulo }}: {{ fila.estado }}</li>
+            }
+          </ul>
+        </div>
+        <div>
+          <h3>NoSQL simulado: documentos</h3>
+          <ul>
+            @for (documento of documentosDemo(); track documento.id) {
+              <li>{{ documento.equipo }} · {{ documento.ubicacion.edificio }}, {{ documento.ubicacion.aula }}
+                ({{ documento.etiquetas.join(', ') }})</li>
+            }
+          </ul>
+        </div>
+      </div>
+    }
+  </section>
+
 </ion-content>

@@ -21,7 +21,8 @@ export class ExportacionService {
     enlace.href = url;
     enlace.download = nombre;
     enlace.click();
-    URL.revokeObjectURL(url);
+    // El navegador necesita tiempo para iniciar la descarga antes de liberar el Blob.
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
   }
 
   abrirInforme(incidencias: Incidencia[]): boolean {
@@ -32,12 +33,23 @@ export class ExportacionService {
     documento.title = 'Informe de incidencias';
     const estilo = documento.createElement('style');
     estilo.textContent = `
-      body { font-family: Arial, sans-serif; margin: 24px; color: #222; }
-      table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-      th, td { border: 1px solid #bbb; padding: 8px; text-align: left; overflow-wrap: anywhere; }
+      body { font-family: Arial, sans-serif; margin: 24px; color: #222; font-size: 12px; }
+      table { width: 100%; border-collapse: collapse; margin-top: 20px; table-layout: fixed; }
+      th, td { border: 1px solid #bbb; padding: 8px; text-align: left; overflow-wrap: anywhere; vertical-align: top; }
       th { background: #eee; }
       button { padding: 10px 16px; margin-top: 12px; }
-      @media print { button { display: none; } body { margin: 0; } }
+      th:nth-child(1) { width: 5%; }
+      th:nth-child(2) { width: 22%; }
+      th:nth-child(3) { width: 48%; }
+      th:nth-child(4) { width: 13%; }
+      th:nth-child(5) { width: 12%; }
+      @media print {
+        @page { size: A4 landscape; margin: 12mm; }
+        button { display: none; }
+        body { margin: 0; }
+        thead { display: table-header-group; }
+        tr { break-inside: avoid; }
+      }
     `;
     documento.head.append(estilo);
 
@@ -49,14 +61,23 @@ export class ExportacionService {
     fecha.textContent = `Fecha: ${new Date().toLocaleDateString('es-ES')}`;
     documento.body.append(fecha);
 
+    const total = documento.createElement('p');
+    total.textContent = `Total de incidencias: ${incidencias.length}`;
+    documento.body.append(total);
+
     const tabla = documento.createElement('table');
+    const cabeceras = documento.createElement('thead');
     const cabecera = documento.createElement('tr');
     for (const texto of ['ID', 'Título', 'Descripción', 'Estado', 'Prioridad']) {
       const celda = documento.createElement('th');
       celda.textContent = texto;
+      celda.scope = 'col';
       cabecera.append(celda);
     }
-    tabla.append(cabecera);
+    cabeceras.append(cabecera);
+    tabla.append(cabeceras);
+
+    const cuerpo = documento.createElement('tbody');
 
     for (const incidencia of incidencias) {
       const fila = documento.createElement('tr');
@@ -66,8 +87,9 @@ export class ExportacionService {
         celda.textContent = String(valor);
         fila.append(celda);
       }
-      tabla.append(fila);
+      cuerpo.append(fila);
     }
+    tabla.append(cuerpo);
     documento.body.append(tabla);
 
     const boton = documento.createElement('button');

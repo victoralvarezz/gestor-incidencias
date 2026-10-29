@@ -12,7 +12,9 @@ describe('ExportacionService', () => {
     }]);
 
     expect(csv).toContain('ID;Título;Descripción;Estado;Prioridad');
+    expect(csv.charCodeAt(0)).toBe(0xfeff);
     expect(csv).toContain('"4";"Pantalla; ""rota""";"No se enciende";"Pendiente";"Alta"');
+    expect(csv.endsWith('\r\n')).toBe(true);
   });
 
   it('prepara el informe con fecha y listado para guardar como PDF', () => {
@@ -31,7 +33,12 @@ describe('ExportacionService', () => {
     expect(resultado).toBe(true);
     expect(documento.title).toBe('Informe de incidencias');
     expect(documento.body.textContent).toContain('Fecha:');
+    expect(documento.body.textContent).toContain('Total de incidencias: 1');
     expect(documento.body.textContent).toContain('Cañón averiado');
+    expect([...documento.querySelectorAll('tbody td')].map(celda => celda.textContent)).toEqual([
+      '5', 'Cañón averiado', 'No proyecta', 'En proceso', 'Media'
+    ]);
+    expect(documento.querySelector('style')?.textContent).toContain('A4 landscape');
     documento.querySelector('button')?.click();
     expect(imprimir).toHaveBeenCalledOnce();
     abrir.mockRestore();

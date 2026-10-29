@@ -1,0 +1,14 @@
+[
+  {
+    "id": "doc-1",
+    "equipo": "Ordenador del aula",
+    "ubicacion": { "edificio": "Principal", "aula": "Aula 2" },
+    "etiquetas": ["hardware", "urgente"]
+  },
+  {
+    "id": "doc-2",
+    "equipo": "Impresora compartida",
+    "ubicacion": { "edificio": "Principal", "aula": "Biblioteca" },
+    "etiquetas": ["periféricos"]
+  }
+]

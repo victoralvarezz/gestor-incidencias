@@ -4,6 +4,6 @@
   </ion-card-header>
   <ion-card-content>
     <h2>{{ cantidad }}</h2>
-    <ion-button fill="clear" (click)="pulsada.emit()">Ver incidencias</ion-button>
+    <ion-button fill="clear" [attr.aria-label]="'Ver incidencias: ' + titulo" (click)="pulsada.emit()">Ver incidencias</ion-button>
   </ion-card-content>
 </ion-card>

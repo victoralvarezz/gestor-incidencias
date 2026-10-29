@@ -47,7 +47,32 @@ h1 {
   gap: 8px;
 }
 
+.fuentes-demo {
+  max-width: 800px;
+  margin: 24px auto;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+}
+
+.fuentes-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.fuentes-grid li {
+  margin-bottom: 8px;
+  overflow-wrap: anywhere;
+}
+
 @media (max-width: 480px) {
   .grafico { padding: 12px; }
   .fila-grafico { grid-template-columns: 75px minmax(0, 1fr) 20px; gap: 8px; font-size: 13px; }
+  .acciones ion-button { width: 100%; }
+  .fuentes-demo { padding: 12px; }
+}
+
+@media (max-width: 700px) {
+  .fuentes-grid { grid-template-columns: 1fr; }
 }

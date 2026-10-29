@@ -1,22 +1,52 @@
 # Gestor de incidencias
 
-## Accesos de demostración
+Aplicación de clase realizada con Ionic, Angular y TypeScript. Permite consultar y registrar incidencias, filtrar la lista y, como administrador, cambiar estados, consultar el dashboard y exportar datos.
+
+## Ejecutar el proyecto
+
+Requiere Node.js y npm. Desde la raíz del proyecto:
+
+```text
+npm ci
+npm start
+```
+
+En PowerShell con la ejecución de scripts restringida, usa `npm.cmd` en vez de `npm`.
+
+Para comprobar el proyecto: `npm test -- --watch=false`, `npm run lint` y `npm run build`.
+
+## Usuarios de prueba
 
 | Usuario | Contraseña | Rol |
 | --- | --- | --- |
-| `alumno` | `1234` | Usuario estándar: consulta y comunica incidencias |
-| `admin` | `1234` | Administrador: consulta, crea, cambia estados y accede al dashboard |
+| `alumno` | `1234` | Consulta y crea incidencias |
+| `admin` | `1234` | También cambia estados, ve el dashboard y exporta |
 
-La autenticación es simulada en el navegador mediante `AuthService` y `sessionStorage`. Estos controles sirven para la práctica; no constituyen seguridad de servidor.
+Las credenciales y los roles están implementados en el navegador para la práctica. No son seguridad real. No introduzcas datos privados.
 
-## Fase 3: datos y exportación
+## Funcionalidades y límites
 
-El gráfico y el CSV usan las incidencias del `IncidenciasService`. Esas incidencias son datos de prueba guardados en un Signal. Al recargar la página, las incidencias nuevas y los cambios de estado se pierden. El CSV descarga una copia de la lista actual; no guarda datos en una base de datos.
+- Las incidencias de ejemplo están en `IncidenciasService`, guardadas en un Signal. Las altas y cambios de estado se pierden al recargar.
+- Los filtros de texto, estado y prioridad trabajan sobre ese Signal.
+- El CSV contiene la lista actual completa, con cabeceras, acentos y campos entrecomillados; puede abrirse en una hoja de cálculo con separador `;`.
+- **Informe PDF** abre una página imprimible con la misma lista. Pulsa **Imprimir o guardar como PDF** y elige **Guardar como PDF** en el navegador. El navegador genera el PDF; la aplicación no descarga directamente un archivo PDF.
+- **Fuentes de datos de demostración** hace dos lecturas HTTP asíncronas de archivos locales: `sql-rest.json` imita filas que entregaría una API REST con SQL y `nosql.json` imita documentos NoSQL. Se muestran en el dashboard. **No hay conexión SQL, API REST de servidor ni base NoSQL reales.** Estos datos son independientes de las incidencias editables.
 
-El botón **Informe PDF** abre un informe preparado para imprimir. En la nueva pestaña se pulsa **Imprimir o guardar como PDF** y se elige **Guardar como PDF** en el diálogo del navegador. Esta opción no necesita una librería de PDF; el archivo lo genera el navegador.
+## Estructura sencilla
 
-### Persistencia y consumo asíncrono pendientes
+- `pages`: login, incidencias, nueva incidencia y dashboard.
+- `components`: una tarjeta de resumen y un elemento de incidencia con `@Input()` y `@Output()`.
+- `services`: autenticación de prueba, incidencias con Signals, exportación y fuentes simuladas.
+- `guards`: protección funcional de rutas según la sesión y el rol.
 
-Todavía no hay conexión SQL ni NoSQL, servidor, API ni credenciales. Para cumplir ese apartado del enunciado habría que elegir con el profesor una base de datos y un servidor que controle los roles. El navegador llamaría de forma asíncrona a una API con operaciones sencillas: `GET /incidencias` para consultar, `POST /incidencias` para crear y `PATCH /incidencias/:id` para cambiar el estado. El servicio Angular recibiría la respuesta y actualizaría el Signal; el servidor guardaría los datos en SQL o NoSQL y comprobaría que solo un administrador puede cambiar estados y exportar la información.
+Consulta [Manual de usuario](docs/MANUAL_USUARIO.md) para los pasos de uso.
 
-En la aplicación actual, los roles se comprueban en el navegador y solo sirven para demostrar el flujo. No deben considerarse autorización real hasta que el servidor haga esa comprobación.
+## Despliegue en Vercel
+
+`npm run build` genera los archivos estáticos en `www`. `vercel.json` indica el directorio de salida y reescribe las rutas de la aplicación hacia `index.html`, para que funcionen al abrir una URL directamente. En Vercel, la raíz del proyecto debe ser este repositorio y el comando de compilación es `npm run build`. No hacen falta variables de entorno para esta versión simulada. No publiques datos reales ni consideres la autenticación del navegador segura.
+
+## Trabajo que requeriría un backend real
+
+Para consumir SQL y NoSQL reales habría que acordar el servidor y los almacenes de datos, crear una API, protegerla y cambiar las lecturas simuladas por peticiones a ella. El servidor debería validar la identidad y los permisos; los guards del navegador no bastan. Este apartado no queda cumplido como integración real con bases de datos.
+
+Compodoc y Lighthouse no forman parte de las dependencias instaladas. La documentación técnica básica está en este README y en el código; si se exige Compodoc, habrá que instalarlo y generar su salida. Lighthouse requiere un navegador compatible y una aplicación servida localmente o publicada.

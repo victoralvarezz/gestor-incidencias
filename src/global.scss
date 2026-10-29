@@ -34,4 +34,9 @@
 
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import '@ionic/angular/css/palettes/dark.system.css';
+/* La interfaz usa fondos claros; se evita una paleta oscura incompleta. */
+
+:focus-visible {
+  outline: 3px solid #174ea6;
+  outline-offset: 2px;
+}
