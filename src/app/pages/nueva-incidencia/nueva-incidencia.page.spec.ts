@@ -1,4 +1,4 @@
-import { describe, beforeEach, it, expect } from 'vitest';
+import { describe, beforeEach, it, expect, vi } from 'vitest';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NuevaIncidenciaPage } from './nueva-incidencia.page';
 import { IncidenciasService } from '../../services/incidencias.service';
@@ -17,7 +17,7 @@ describe('NuevaIncidenciaPage', () => {
     expect(component).toBeTruthy();
   });
 
-  it('guarda una incidencia y actualiza el dashboard y la lista', () => {
+  it('guarda una incidencia y actualiza el dashboard y la lista', async () => {
     const servicio = TestBed.inject(IncidenciasService);
     const totalAnterior = servicio.total();
 
@@ -26,6 +26,7 @@ describe('NuevaIncidenciaPage', () => {
       descripcion: 'La pantalla no muestra ninguna imagen.',
       prioridad: 'Alta'
     });
+    await vi.waitFor(() => expect(component.formulario.pending).toBe(false));
     component.guardar();
 
     expect(servicio.total()).toBe(totalAnterior + 1);
@@ -34,7 +35,7 @@ describe('NuevaIncidenciaPage', () => {
     expect(component.guardado()).toBe(true);
   });
 
-  it('rechaza datos con espacios y guarda el texto recortado', () => {
+  it('rechaza datos con espacios y guarda el texto recortado', async () => {
     const servicio = TestBed.inject(IncidenciasService);
     const totalAnterior = servicio.total();
 
@@ -51,8 +52,30 @@ describe('NuevaIncidenciaPage', () => {
       descripcion: '  El ratón no responde.  ',
       prioridad: 'Media'
     });
+    await vi.waitFor(() => expect(component.formulario.pending).toBe(false));
     component.guardar();
     expect(servicio.incidencias().at(-1)?.titulo).toBe('Ratón roto');
     expect(servicio.incidencias().at(-1)?.descripcion).toBe('El ratón no responde.');
+  });
+
+  it('consulta el servicio y rechaza un título repetido', async () => {
+    const servicio = TestBed.inject(IncidenciasService);
+    const totalAnterior = servicio.total();
+
+    component.formulario.setValue({
+      titulo: '  ORDENADOR AVERIADO  ',
+      descripcion: 'El equipo sigue sin encender.',
+      prioridad: 'Alta'
+    });
+    expect(component.formulario.pending).toBe(true);
+    component.guardar();
+    expect(servicio.total()).toBe(totalAnterior);
+
+    await vi.waitFor(() => expect(component.formulario.controls.titulo.hasError('tituloRepetido')).toBe(true));
+    component.guardar();
+    fixture.detectChanges();
+
+    expect(servicio.total()).toBe(totalAnterior);
+    expect(fixture.nativeElement.textContent).toContain('Ya existe una incidencia');
   });
 });

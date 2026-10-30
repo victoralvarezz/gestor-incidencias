@@ -28,8 +28,12 @@
           </ion-input>
         </ion-item>
 
-        @if (formulario.controls.titulo.touched &&
-             formulario.controls.titulo.invalid) {
+        @if (formulario.controls.titulo.pending) {
+          <ion-note role="status">Comprobando si el título ya existe…</ion-note>
+        }
+        @if (formulario.controls.titulo.touched && formulario.controls.titulo.hasError('tituloRepetido')) {
+          <ion-note color="danger" role="alert">Ya existe una incidencia con ese título.</ion-note>
+        } @else if (formulario.controls.titulo.touched && formulario.controls.titulo.invalid) {
           <ion-note color="danger" role="alert">
             El título debe tener al menos 3 caracteres.
           </ion-note>
@@ -75,7 +79,7 @@
 
       </ion-list>
 
-      <ion-button type="submit" expand="block">
+      <ion-button type="submit" expand="block" [disabled]="formulario.pending">
         Guardar incidencia
       </ion-button>
 

@@ -52,6 +52,13 @@ export class IncidenciasService {
     this.incidencias().filter(i => i.estado === 'Resuelta').length
   );
 
+  // Simula una consulta asíncrona antes de aceptar un título nuevo.
+  async tituloDisponible(titulo: string): Promise<boolean> {
+    await new Promise(resolve => setTimeout(resolve, 150));
+    const texto = titulo.trim().toLowerCase();
+    return !this.incidencias().some(i => i.titulo.trim().toLowerCase() === texto);
+  }
+
   // Añadir una nueva incidencia
   agregarIncidencia(
     datos: Pick<Incidencia, 'titulo' | 'descripcion' | 'prioridad'>

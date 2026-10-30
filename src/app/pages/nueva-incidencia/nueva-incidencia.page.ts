@@ -66,7 +66,11 @@ export class NuevaIncidenciaPage {
       validators: [
         Validators.required,
         Validators.minLength(3)
-      ]
+      ],
+      asyncValidators: [async control => {
+        const disponible = await this.servicio.tituloDisponible(control.value);
+        return disponible ? null : { tituloRepetido: true };
+      }]
     }),
 
     descripcion: new FormControl('', {
@@ -103,7 +107,7 @@ export class NuevaIncidenciaPage {
     }
 
     // Comprobamos que el formulario sea valido
-    if (this.formulario.invalid) {
+    if (this.formulario.invalid || this.formulario.pending) {
       this.formulario.markAllAsTouched();
       return;
     }
