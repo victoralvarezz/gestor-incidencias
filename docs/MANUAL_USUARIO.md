@@ -8,7 +8,7 @@ Abre la aplicación e inicia sesión como `alumno` o `admin`, con la contraseña
 
 En **Incidencias**, utiliza la búsqueda y los filtros de estado y prioridad. El contador indica cuántas incidencias coinciden. Si ninguna coincide, aparece un mensaje en lugar de una lista vacía.
 
-Abre el menú lateral y selecciona **Nueva incidencia**. Escribe un título de al menos 3 caracteres, una descripción de al menos 10 y elige una prioridad. Los espacios al principio y al final no cuentan para las longitudes mínimas y se eliminan al guardar. Si falta algún dato, verás un aviso junto al campo. Pulsa **Guardar incidencia**. La nueva incidencia aparece como **Pendiente** en el listado y actualiza el resumen del administrador.
+Abre el menú lateral y selecciona **Nueva incidencia**. Escribe un título de al menos 3 caracteres, una descripción de al menos 10 y elige una prioridad. Los espacios al principio y al final no cuentan para las longitudes mínimas y se eliminan al guardar. Si falta algún dato, verás un aviso junto al campo. La aplicación comprueba con el servicio si ya existe una incidencia con el mismo título: durante la comprobación muestra un mensaje y desactiva el botón de guardar. Si está repetido, cambia el título. Pulsa **Guardar incidencia**. La nueva incidencia aparece como **Pendiente** en el listado y actualiza el resumen del administrador.
 
 ## Funciones del administrador
 

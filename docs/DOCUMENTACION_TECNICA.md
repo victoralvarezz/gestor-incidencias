@@ -34,7 +34,10 @@ de servidor.
 - Los formularios de acceso y de nueva incidencia usan `FormGroup`,
   `FormControl` y `Validators`. El segundo exige título de 3 caracteres,
   descripción de 10 y prioridad. También rechaza texto compuesto solo por
-  espacios. Los errores se muestran junto al campo.
+  espacios. Además, un validador asíncrono consulta `IncidenciasService` para
+  impedir títulos repetidos sin distinguir mayúsculas ni espacios exteriores.
+  Mientras se resuelve, el formulario no se puede guardar. Los errores se
+  muestran junto al campo.
 - `FuentesDemoService` usa `fetch` y `Promise.all` para leer en paralelo dos
   archivos de `src/assets/datos`. Uno representa filas SQL/REST y otro
   documentos NoSQL. Se muestran solo al pulsar el botón del dashboard. No son
@@ -59,11 +62,15 @@ npm start
 npm test -- --watch=false
 npm run lint
 npm run build
+npm run docs:generate
 ```
 
 En PowerShell puede usarse `npm.cmd` si `npm` está bloqueado. La compilación de
-producción crea `www`. El proyecto no añade dependencias para generar informes
-ni para conectar bases de datos.
+producción crea `www`. `docs:generate` crea
+`docs/REFERENCIA_GENERADA.md` desde las rutas, guards, componentes y servicios
+del código. Es la alternativa de documentación generada a Compodoc y usa solo
+Node. El proyecto no añade dependencias para generar informes ni para conectar
+bases de datos.
 
 ## Diseño y despliegue
 
@@ -79,9 +86,16 @@ que comprobar en Vercel qué rama se publica y probar la web desplegada con
 ambos roles. La configuración del repositorio no publica por sí sola la versión
 actual.
 
-## Límites que debe confirmar el enunciado
+El workflow `.github/workflows/ci.yml` se ejecuta al subir cambios a `develop`
+o abrir una solicitud de cambios hacia esa rama. Comprueba que la referencia
+generada está actualizada y ejecuta pruebas, lint y build. Su resultado se debe
+revisar en GitHub tras el push.
 
-No se ha localizado el enunciado original en el repositorio. Si exige SQL o
-NoSQL reales, descarga directa de un archivo PDF, Compodoc o un informe
-Lighthouse, esos apartados requieren trabajo adicional. No deben presentarse
-las simulaciones como conexiones reales.
+## Límites y comprobaciones externas
+
+El enunciado permite simular SQL/REST y NoSQL; los dos JSON cumplen ese alcance.
+No deben presentarse como conexiones reales. La exportación PDF usa la función
+de impresión del navegador, de modo que hay que comprobar manualmente el
+archivo guardado. El objetivo de 90 en Lighthouse para Accesibilidad y Buenas
+Prácticas aún necesita una medición real en navegador. Tampoco se ha verificado
+la publicación actual de Vercel como parte de esta fase.

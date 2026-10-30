@@ -1,0 +1,26 @@
+name: Comprobaciones
+
+on:
+  push:
+    branches: [develop]
+  pull_request:
+    branches: [develop]
+
+permissions:
+  contents: read
+
+jobs:
+  verificar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - run: npm run docs:generate
+      - run: git diff --exit-code -- docs/REFERENCIA_GENERADA.md
+      - run: npm test -- --watch=false
+      - run: npm run lint
+      - run: npm run build
