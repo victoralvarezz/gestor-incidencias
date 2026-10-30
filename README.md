@@ -39,7 +39,9 @@ Las credenciales y los roles están implementados en el navegador para la práct
 - `services`: autenticación de prueba, incidencias con Signals, exportación y fuentes simuladas.
 - `guards`: protección funcional de rutas según la sesión y el rol.
 
-Consulta [Manual de usuario](docs/MANUAL_USUARIO.md) para los pasos de uso.
+Consulta el [Manual de usuario](docs/MANUAL_USUARIO.md) para los pasos de uso y la
+[Documentación técnica](docs/DOCUMENTACION_TECNICA.md) para entender las rutas,
+los datos y las comprobaciones de la práctica.
 
 ## Despliegue en Vercel
 
