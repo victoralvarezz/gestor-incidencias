@@ -23,6 +23,7 @@
             label="Título"
             labelPlacement="stacked"
             placeholder="Ej. Ordenador averiado"
+            [attr.aria-invalid]="formulario.controls.titulo.touched && formulario.controls.titulo.invalid"
             formControlName="titulo">
           </ion-input>
         </ion-item>
@@ -40,6 +41,7 @@
             label="Descripción"
             labelPlacement="stacked"
             placeholder="Explica qué ha ocurrido"
+            [attr.aria-invalid]="formulario.controls.descripcion.touched && formulario.controls.descripcion.invalid"
             formControlName="descripcion"
             [autoGrow]="true"
             [rows]="3">
@@ -58,6 +60,7 @@
           <ion-select
             label="Prioridad"
             labelPlacement="stacked"
+            [attr.aria-invalid]="formulario.controls.prioridad.touched && formulario.controls.prioridad.invalid"
             formControlName="prioridad">
 
             <ion-select-option value="Baja">Baja</ion-select-option>
@@ -66,6 +69,9 @@
 
           </ion-select>
         </ion-item>
+        @if (formulario.controls.prioridad.touched && formulario.controls.prioridad.invalid) {
+          <ion-note color="danger" role="alert">Selecciona una prioridad.</ion-note>
+        }
 
       </ion-list>
 

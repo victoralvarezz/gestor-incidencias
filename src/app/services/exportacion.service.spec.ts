@@ -43,4 +43,10 @@ describe('ExportacionService', () => {
     expect(imprimir).toHaveBeenCalledOnce();
     abrir.mockRestore();
   });
+
+  it('informa si el navegador impide abrir el informe', () => {
+    const abrir = vi.spyOn(window, 'open').mockReturnValue(null);
+    expect(new ExportacionService().abrirInforme([])).toBe(false);
+    abrir.mockRestore();
+  });
 });

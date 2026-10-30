@@ -51,6 +51,9 @@
     <ion-button (click)="exportarCsv()">Descargar CSV</ion-button>
     <ion-button (click)="abrirInforme()">Informe PDF</ion-button>
   </div>
+  @if (errorInforme()) {
+    <p class="aviso-informe" role="alert">El navegador ha bloqueado el informe. Permite las ventanas emergentes y vuelve a intentarlo.</p>
+  }
 
   <section class="fuentes-demo" aria-labelledby="titulo-fuentes">
     <h2 id="titulo-fuentes">Fuentes de datos de demostración</h2>

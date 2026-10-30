@@ -50,6 +50,7 @@ export class DashboardPage {
   readonly documentosDemo = signal<DocumentoNoSqlDemo[]>([]);
   readonly cargandoDemo = signal(false);
   readonly errorDemo = signal('');
+  readonly errorInforme = signal(false);
 
   readonly grafico = computed(() => {
     const incidencias = this.servicio.incidencias();
@@ -78,7 +79,7 @@ export class DashboardPage {
 
   abrirInforme(): void {
     if (!this.auth.esAdministrador()) return;
-    this.exportacion.abrirInforme(this.servicio.incidencias());
+    this.errorInforme.set(!this.exportacion.abrirInforme(this.servicio.incidencias()));
   }
 
   async cargarFuentesDemo(): Promise<void> {

@@ -20,7 +20,9 @@ export class ExportacionService {
     const url = URL.createObjectURL(contenido);
     enlace.href = url;
     enlace.download = nombre;
+    document.body.append(enlace);
     enlace.click();
+    enlace.remove();
     // El navegador necesita tiempo para iniciar la descarga antes de liberar el Blob.
     setTimeout(() => URL.revokeObjectURL(url), 1000);
   }

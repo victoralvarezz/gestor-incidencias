@@ -62,4 +62,15 @@ describe('DashboardPage', () => {
     expect(informe).toHaveBeenCalledOnce();
     auth.cerrarSesion();
   });
+
+  it('avisa si el navegador bloquea el informe', () => {
+    TestBed.inject(AuthService).iniciarSesion('admin', '1234');
+    vi.spyOn(TestBed.inject(ExportacionService), 'abrirInforme').mockReturnValue(false);
+
+    component.abrirInforme();
+    fixture.detectChanges();
+
+    expect(component.errorInforme()).toBe(true);
+    expect(fixture.nativeElement.querySelector('[role="alert"]')?.textContent).toContain('bloqueado');
+  });
 });

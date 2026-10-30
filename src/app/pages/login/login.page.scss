@@ -22,3 +22,8 @@ ion-button {
 .ayuda {
   margin-top: 20px;
 }
+
+@media (max-width: 600px) {
+  .contenedor { margin: 16px auto; }
+  form { padding: 16px; }
+}
