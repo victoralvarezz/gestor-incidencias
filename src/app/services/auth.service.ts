@@ -21,13 +21,15 @@ export class AuthService {
 
   iniciarSesion(nombre: string, contrasena: string): boolean {
     // Credenciales de ejemplo para practicar el flujo de acceso.
-    if (!((nombre === 'alumno' && contrasena === '1234') ||
-      (nombre === 'admin' && contrasena === '1234'))) {
+    const usuario = nombre.trim();
+    const clave = contrasena.trim();
+    if (!((usuario === 'alumno' && clave === '1234') ||
+      (usuario === 'admin' && clave === '1234'))) {
       return false;
     }
 
-    sessionStorage.setItem(this.claveSesion, nombre);
-    this.usuario.set(nombre);
+    sessionStorage.setItem(this.claveSesion, usuario);
+    this.usuario.set(usuario);
     return true;
   }
 

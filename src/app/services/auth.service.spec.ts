@@ -26,6 +26,15 @@ describe('AuthService', () => {
     expect(new AuthService().esAdministrador()).toBe(true);
   });
 
+  it('ignora espacios accidentales al introducir las credenciales', () => {
+    const auth = new AuthService();
+    expect(auth.iniciarSesion(' admin ', '1234 ')).toBe(true);
+    expect(auth.usuario()).toBe('admin');
+    expect(auth.esAdministrador()).toBe(true);
+    expect(sessionStorage.getItem('gestorUsuario')).toBe('admin');
+    expect(auth.iniciarSesion('admin', 'otra clave')).toBe(false);
+  });
+
   it('recupera la sesión y la elimina al salir', () => {
     sessionStorage.setItem('gestorUsuario', 'alumno');
     const auth = new AuthService();
