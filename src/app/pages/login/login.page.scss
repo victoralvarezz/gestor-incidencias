@@ -1,24 +1,27 @@
 ion-content { --background: #f5f7fd; }
 .login-shell { min-height: 100%; max-width: 1440px; margin: auto; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); background: #fff; }
-.login-brand { grid-column: 2; grid-row: 1; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; padding: clamp(28px, 5vw, 68px); color: #fff; background: linear-gradient(145deg, #172d72 4%, #375bd1 65%, #7368c8); }
+.login-brand { grid-column: 2; grid-row: 1; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; padding: clamp(28px, 5vw, 68px); color: #fff; background: linear-gradient(145deg, #132765 4%, #3559cc 58%, #7769c8); }
+.login-brand::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 82% 18%, rgba(205, 197, 255, .22), transparent 42%); pointer-events: none; }
 .login-brand::after { content: ''; position: absolute; width: 420px; height: 420px; right: -210px; bottom: -180px; border-radius: 50%; background: rgba(255, 255, 255, .08); pointer-events: none; }
 .brand-top { display: flex; align-items: center; gap: 12px; font-weight: 750; letter-spacing: -.02em; }
-.brand-mark { width: 42px; height: 42px; display: grid; place-items: center; border-radius: 12px; background: rgba(255, 255, 255, .18); border: 1px solid rgba(255, 255, 255, .25); font-size: 14px; letter-spacing: .04em; }
+.brand-mark { width: 42px; height: 42px; display: grid; place-items: center; border-radius: 12px; background: rgba(255, 255, 255, .18); border: 1px solid rgba(255, 255, 255, .32); box-shadow: 0 8px 22px rgba(12, 27, 84, .16); font-size: 14px; letter-spacing: .04em; }
 .brand-message { position: relative; z-index: 1; max-width: 520px; }
 .brand-eyebrow { color: #dddafa; font-size: 11px; font-weight: 800; letter-spacing: .16em; }
 .brand-message h2 { font-size: clamp(38px, 4.4vw, 62px); line-height: 1.08; letter-spacing: -.055em; margin: 18px 0 22px; font-weight: 760; }
 .brand-message p { max-width: 410px; color: #e2e8ff; font-size: 16px; line-height: 1.7; margin: 0; }
 .brand-foot { position: relative; z-index: 1; color: #d7e0ff; font-size: 12px; margin: 0; }
-.login-panel { grid-column: 1; grid-row: 1; display: grid; place-items: center; padding: 40px 28px; }
+.login-panel { grid-column: 1; grid-row: 1; display: grid; place-items: center; padding: 40px 28px; background: linear-gradient(160deg, #fff 55%, #f9faff); }
 .formulario-wrap { width: min(100%, 430px); }
 .eyebrow { color: #6575bb; font-size: 11px; font-weight: 800; letter-spacing: .14em; }
 h1 { color: #172653; font-size: clamp(30px, 3vw, 40px); letter-spacing: -.045em; line-height: 1.15; margin: 12px 0 10px; }
-.intro { color: #687592; margin: 0 0 32px; line-height: 1.5; }
+.intro { color: #687592; margin: 0 0 28px; line-height: 1.5; }
 form { display: grid; gap: 14px; }
-.campo { --background: #f7f8fd; --padding-start: 16px; --inner-padding-end: 16px; --min-height: 68px; border: 1px solid #e2e7f5; border-radius: 12px; }
+.campo { --background: #fff; --padding-start: 16px; --inner-padding-end: 16px; --min-height: 64px; border: 1px solid #dfe6f4; border-radius: 10px; box-shadow: 0 2px 9px rgba(29, 49, 103, .035); }
+.campo:hover { border-color: #b8c7ea; }
 .campo:focus-within { border-color: #5371e3; box-shadow: 0 0 0 3px rgba(83, 113, 227, .12); }
 ion-note { display: block; margin: -6px 4px 0; font-size: 13px; }
-.entrar { --border-radius: 12px; height: 50px; margin: 8px 0 0; font-weight: 700; }
+.entrar { --border-radius: 10px; --background: #385bd2; --box-shadow: 0 8px 18px rgba(56, 91, 210, .2); height: 48px; margin: 8px 0 0; font-weight: 750; }
+.entrar:hover { --background: #2e4fc2; }
 .pie { color: #8a94aa; font-size: 12px; margin: 25px 0 0; text-align: center; }
 
 @media (max-width: 760px) {

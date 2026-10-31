@@ -1,13 +1,16 @@
 :host { display: block; height: 100%; }
-ion-card { height: 100%; margin: 0; border: 1px solid #e3e9fb; border-top: 4px solid #4f6fe9; border-radius: 18px; box-shadow: 0 14px 36px rgba(28, 48, 111, .075); background: #fff; }
+ion-card { height: 100%; margin: 0; border: 1px solid #dfe6f9; border-top: 3px solid #4f6fe9; border-radius: 16px; box-shadow: 0 8px 24px rgba(28, 48, 111, .065); background: linear-gradient(135deg, #fff 72%, #f1f4ff); transition: transform .18s ease, box-shadow .18s ease; }
 ion-card.pendientes { border-top-color: #a995e8; }
 ion-card.resueltas { border-top-color: #57b7aa; }
-ion-card-header { padding: 15px 18px 0; }
+ion-card.pendientes { background: linear-gradient(135deg, #fff 72%, #f7f3ff); }
+ion-card.resueltas { background: linear-gradient(135deg, #fff 72%, #effaf7); }
+ion-card:hover { transform: translateY(-2px); box-shadow: 0 13px 28px rgba(28, 48, 111, .1); }
+ion-card-header { padding: 13px 17px 0; }
 .card-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
-ion-card-title { color: #65718e; font-size: 13px; font-weight: 750; }
-.stat-icon { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 10px; background: #edf1ff; color: #4f6fe9; font-size: 18px; }
+ion-card-title { color: #586784; font-size: 12px; font-weight: 800; letter-spacing: .02em; }
+.stat-icon { width: 32px; height: 32px; display: grid; place-items: center; border-radius: 9px; background: #e9efff; color: #4f6fe9; font-size: 18px; }
 .pendientes .stat-icon { background: #f1ecfd; color: #9179da; }
 .resueltas .stat-icon { background: #e9f7f3; color: #38a996; }
-ion-card-content { padding: 0 18px 13px; }
-h2 { color: #192956; font-size: 36px; font-weight: 780; letter-spacing: -.055em; line-height: 1; margin: 5px 0 5px; }
-ion-button { --padding-start: 0; --padding-end: 0; height: 27px; margin: 0; font-size: 12px; font-weight: 700; }
+ion-card-content { padding: 0 17px 11px; }
+h2 { color: #182856; font-size: 38px; font-weight: 800; letter-spacing: -.055em; line-height: 1; margin: 3px 0 4px; }
+ion-button { --padding-start: 0; --padding-end: 0; height: 25px; margin: 0; font-size: 11px; font-weight: 800; }

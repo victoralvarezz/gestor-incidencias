@@ -1,22 +1,25 @@
-:host { display: grid; grid-template-columns: var(--columnas-incidencias); gap: 14px; align-items: center; min-height: 84px; padding: 14px 20px; border-top: 1px solid #edf0f8; background: #fff; }
-:host:nth-of-type(even) { background: #fcfdff; }
+:host { display: grid; grid-template-columns: var(--columnas-incidencias); gap: 14px; align-items: center; min-height: 72px; padding: 10px 20px; border-top: 1px solid #e8edf6; background: #fff; transition: background-color .16s ease; }
+:host:nth-of-type(even) { background: #fafbfe; }
+:host:hover { background: #f3f6ff; }
 [role="cell"] { min-width: 0; }
-.celda-id { color: #8390ae; font-size: 12px; font-weight: 750; }
+.celda-id { color: #6e7fa5; font-size: 12px; font-weight: 800; font-variant-numeric: tabular-nums; }
 .celda-incidencia { display: grid; gap: 4px; min-width: 0; }
-.celda-incidencia strong { color: #1d2d59; font-size: 14px; overflow-wrap: anywhere; }
+.celda-incidencia strong { color: #172b59; font-size: 14px; font-weight: 750; overflow-wrap: anywhere; }
 .celda-incidencia span { color: #687592; font-size: 12px; line-height: 1.4; overflow-wrap: anywhere; }
-.prioridad { display: inline-block; color: #54716b; background: #eaf6f1; border-radius: 999px; padding: 5px 9px; font-size: 11px; font-weight: 750; }
-.prioridad.media { color: #6c5c9d; background: #f0ecfb; }
-.prioridad.alta { color: #a05258; background: #fff0f0; }
-.celda-estado ion-badge { border-radius: 999px; padding: 7px 10px; font-weight: 700; }
+.prioridad { display: inline-flex; align-items: center; gap: 6px; color: #54716b; background: #eaf6f1; border: 1px solid #d8eee5; border-radius: 999px; padding: 5px 9px; font-size: 11px; font-weight: 750; }
+.prioridad::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.prioridad.media { color: #6c5c9d; background: #f0ecfb; border-color: #e5ddf6; }
+.prioridad.alta { color: #a05258; background: #fff0f0; border-color: #f6dddd; }
+.celda-estado ion-badge { border-radius: 999px; padding: 6px 10px; font-weight: 750; letter-spacing: .01em; }
 .celda-estado ion-badge.pendiente { --background: #eaf0ff; --color: #3c5fce; }
 .celda-estado ion-badge.proceso { --background: #f0ecfb; --color: #725bb7; }
 .celda-estado ion-badge.resuelta { --background: #e8f7f2; --color: #268575; }
-.celda-accion ion-select { width: 100%; font-size: 12px; color: #3f5fc3; border: 1px solid #dfe6f7; border-radius: 9px; padding: 0 8px; }
+.celda-accion ion-select { width: 100%; min-height: 34px; font-size: 12px; color: #3457be; background: #fff; border: 1px solid #dbe4f5; border-radius: 8px; padding: 0 8px; }
+.celda-accion ion-select:hover { border-color: #91a5e4; }
 .solo-lectura { color: #8a94aa; font-size: 12px; }
 
 @media (max-width: 1100px) {
-  :host, :host:nth-of-type(even) { grid-template-columns: minmax(0, 1fr) auto; gap: 12px; padding: 18px; border: 1px solid #e6eafa; border-radius: 16px; background: #fff; box-shadow: 0 8px 25px rgba(28, 48, 111, .045); }
+  :host, :host:nth-of-type(even) { grid-template-columns: minmax(0, 1fr) auto; gap: 10px; padding: 15px 17px; border: 1px solid #e2e9f7; border-radius: 14px; background: #fff; box-shadow: 0 6px 20px rgba(28, 48, 111, .04); }
   .celda-id { grid-column: 1 / -1; font-size: 10px; letter-spacing: .1em; }
   .celda-incidencia { grid-column: 1; }
   .celda-estado { grid-column: 2; grid-row: 2; }
