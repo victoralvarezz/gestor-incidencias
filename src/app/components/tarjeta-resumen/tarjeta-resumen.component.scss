@@ -2,8 +2,12 @@
 ion-card { height: 100%; margin: 0; border: 1px solid #e3e9fb; border-top: 4px solid #4f6fe9; border-radius: 18px; box-shadow: 0 14px 36px rgba(28, 48, 111, .075); background: #fff; }
 ion-card.pendientes { border-top-color: #a995e8; }
 ion-card.resueltas { border-top-color: #57b7aa; }
-ion-card-header { padding: 20px 22px 0; }
+ion-card-header { padding: 15px 18px 0; }
+.card-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
 ion-card-title { color: #65718e; font-size: 13px; font-weight: 750; }
-ion-card-content { padding: 4px 22px 17px; }
-h2 { color: #192956; font-size: 46px; font-weight: 780; letter-spacing: -.055em; line-height: 1; margin: 10px 0 9px; }
+.stat-icon { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 10px; background: #edf1ff; color: #4f6fe9; font-size: 18px; }
+.pendientes .stat-icon { background: #f1ecfd; color: #9179da; }
+.resueltas .stat-icon { background: #e9f7f3; color: #38a996; }
+ion-card-content { padding: 0 18px 13px; }
+h2 { color: #192956; font-size: 36px; font-weight: 780; letter-spacing: -.055em; line-height: 1; margin: 5px 0 5px; }
 ion-button { --padding-start: 0; --padding-end: 0; height: 27px; margin: 0; font-size: 12px; font-weight: 700; }

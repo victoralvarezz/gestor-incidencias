@@ -23,7 +23,10 @@ import { addIcons } from 'ionicons';
 import {
   gridOutline,
   listOutline,
-  addCircleOutline
+  addCircleOutline,
+  layersOutline,
+  timeOutline,
+  checkmarkCircleOutline
 } from 'ionicons/icons';
 import { AuthService } from './services/auth.service';
 
@@ -66,7 +69,10 @@ export class AppComponent {
     addIcons({
       gridOutline,
       listOutline,
-      addCircleOutline
+      addCircleOutline,
+      layersOutline,
+      timeOutline,
+      checkmarkCircleOutline
     });
   }
 

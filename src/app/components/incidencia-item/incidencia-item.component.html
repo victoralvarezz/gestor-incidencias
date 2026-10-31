@@ -1,25 +1,28 @@
-<ion-item lines="none">
-  <ion-label>
-    <span class="referencia">INCIDENCIA #{{ incidencia.id }}</span>
-    <h2>{{ incidencia.titulo }}</h2>
-    <p class="descripcion">{{ incidencia.descripcion }}</p>
-    <span class="prioridad" [class.alta]="incidencia.prioridad === 'Alta'"
-      [class.media]="incidencia.prioridad === 'Media'">Prioridad {{ incidencia.prioridad }}</span>
-  </ion-label>
-
-  <div slot="end" class="estado">
-    <ion-badge [class.pendiente]="incidencia.estado === 'Pendiente'"
-      [class.proceso]="incidencia.estado === 'En proceso'"
-      [class.resuelta]="incidencia.estado === 'Resuelta'">
-      {{ incidencia.estado }}
-    </ion-badge>
-    @if (puedeCambiarEstado) {
-      <ion-select aria-label="Cambiar estado de {{ incidencia.titulo }}" interface="popover"
-        [value]="incidencia.estado" (ionChange)="avisarCambio($event.detail.value)">
-        <ion-select-option value="Pendiente">Pendiente</ion-select-option>
-        <ion-select-option value="En proceso">En proceso</ion-select-option>
-        <ion-select-option value="Resuelta">Resuelta</ion-select-option>
-      </ion-select>
-    }
-  </div>
-</ion-item>
+<div class="celda-id" role="cell">#{{ incidencia.id }}</div>
+<div class="celda-incidencia" role="cell">
+  <strong>{{ incidencia.titulo }}</strong>
+  <span>{{ incidencia.descripcion }}</span>
+</div>
+<div class="celda-prioridad" role="cell">
+  <span class="prioridad" [class.alta]="incidencia.prioridad === 'Alta'"
+    [class.media]="incidencia.prioridad === 'Media'">{{ incidencia.prioridad }}</span>
+</div>
+<div class="celda-estado" role="cell">
+  <ion-badge [class.pendiente]="incidencia.estado === 'Pendiente'"
+    [class.proceso]="incidencia.estado === 'En proceso'"
+    [class.resuelta]="incidencia.estado === 'Resuelta'">
+    {{ incidencia.estado }}
+  </ion-badge>
+</div>
+<div class="celda-accion" role="cell">
+  @if (puedeCambiarEstado) {
+    <ion-select aria-label="Cambiar estado de {{ incidencia.titulo }}" interface="popover"
+      [value]="incidencia.estado" (ionChange)="avisarCambio($event.detail.value)">
+      <ion-select-option value="Pendiente">Pendiente</ion-select-option>
+      <ion-select-option value="En proceso">En proceso</ion-select-option>
+      <ion-select-option value="Resuelta">Resuelta</ion-select-option>
+    </ion-select>
+  } @else {
+    <span class="solo-lectura">Consulta</span>
+  }
+</div>

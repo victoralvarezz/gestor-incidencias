@@ -26,6 +26,13 @@ describe('IncidenciasPage', () => {
     expect(component).toBeTruthy();
   });
 
+  it('presenta encabezados y filas de incidencias como tabla', () => {
+    const tabla = fixture.nativeElement.querySelector('[role="table"]');
+    expect(tabla).not.toBeNull();
+    expect(tabla.querySelectorAll('[role="columnheader"]')).toHaveLength(5);
+    expect(tabla.querySelectorAll('app-incidencia-item[role="row"]')).toHaveLength(3);
+  });
+
   it('filtra las incidencias y actualiza el resumen al cambiar el estado', () => {
     TestBed.inject(AuthService).iniciarSesion('admin', '1234');
     const servicio = TestBed.inject(IncidenciasService);

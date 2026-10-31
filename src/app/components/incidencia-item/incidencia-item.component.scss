@@ -1,20 +1,26 @@
-ion-item { --background: #fff; --padding-start: 20px; --inner-padding-end: 20px; --min-height: 130px; border: 1px solid #e6eafa; border-radius: 16px; box-shadow: 0 8px 25px rgba(28, 48, 111, .045); }
-ion-label { min-width: 0; white-space: normal; margin: 18px 0; }
-.referencia { color: #7b88aa; font-size: 10px; font-weight: 800; letter-spacing: .12em; }
-h2 { color: #1d2d59; font-size: 17px; font-weight: 750; margin: 7px 0 5px; overflow-wrap: anywhere; }
-.descripcion { color: #687592; line-height: 1.45; margin: 0 0 12px; overflow-wrap: anywhere; }
+:host { display: grid; grid-template-columns: var(--columnas-incidencias); gap: 14px; align-items: center; min-height: 84px; padding: 14px 20px; border-top: 1px solid #edf0f8; background: #fff; }
+:host:nth-of-type(even) { background: #fcfdff; }
+[role="cell"] { min-width: 0; }
+.celda-id { color: #8390ae; font-size: 12px; font-weight: 750; }
+.celda-incidencia { display: grid; gap: 4px; min-width: 0; }
+.celda-incidencia strong { color: #1d2d59; font-size: 14px; overflow-wrap: anywhere; }
+.celda-incidencia span { color: #687592; font-size: 12px; line-height: 1.4; overflow-wrap: anywhere; }
 .prioridad { display: inline-block; color: #54716b; background: #eaf6f1; border-radius: 999px; padding: 5px 9px; font-size: 11px; font-weight: 750; }
 .prioridad.media { color: #6c5c9d; background: #f0ecfb; }
 .prioridad.alta { color: #a05258; background: #fff0f0; }
-.estado { display: flex; flex-direction: column; align-items: end; gap: 12px; padding: 14px 0; }
-.estado ion-badge { border-radius: 999px; padding: 7px 10px; font-weight: 700; }
-.estado ion-badge.pendiente { --background: #eaf0ff; --color: #3c5fce; }
-.estado ion-badge.proceso { --background: #f0ecfb; --color: #725bb7; }
-.estado ion-badge.resuelta { --background: #e8f7f2; --color: #268575; }
-.estado ion-select { min-width: 126px; font-size: 12px; color: #3f5fc3; border: 1px solid #dfe6f7; border-radius: 9px; padding: 0 8px; }
+.celda-estado ion-badge { border-radius: 999px; padding: 7px 10px; font-weight: 700; }
+.celda-estado ion-badge.pendiente { --background: #eaf0ff; --color: #3c5fce; }
+.celda-estado ion-badge.proceso { --background: #f0ecfb; --color: #725bb7; }
+.celda-estado ion-badge.resuelta { --background: #e8f7f2; --color: #268575; }
+.celda-accion ion-select { width: 100%; font-size: 12px; color: #3f5fc3; border: 1px solid #dfe6f7; border-radius: 9px; padding: 0 8px; }
+.solo-lectura { color: #8a94aa; font-size: 12px; }
 
-@media (max-width: 620px) {
-  ion-item { --padding-start: 16px; --inner-padding-end: 16px; }
-  .estado { max-width: 110px; align-items: start; }
-  .estado ion-select { min-width: 100px; }
+@media (max-width: 1100px) {
+  :host, :host:nth-of-type(even) { grid-template-columns: minmax(0, 1fr) auto; gap: 12px; padding: 18px; border: 1px solid #e6eafa; border-radius: 16px; background: #fff; box-shadow: 0 8px 25px rgba(28, 48, 111, .045); }
+  .celda-id { grid-column: 1 / -1; font-size: 10px; letter-spacing: .1em; }
+  .celda-incidencia { grid-column: 1; }
+  .celda-estado { grid-column: 2; grid-row: 2; }
+  .celda-prioridad { grid-column: 1; }
+  .celda-accion { grid-column: 2; grid-row: 3; }
+  .celda-accion ion-select { min-width: 108px; }
 }

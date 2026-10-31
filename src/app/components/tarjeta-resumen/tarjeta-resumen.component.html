@@ -1,6 +1,9 @@
 <ion-card [class.pendientes]="titulo === 'Pendientes'" [class.resueltas]="titulo === 'Resueltas'">
   <ion-card-header>
-    <ion-card-title>{{ titulo }}</ion-card-title>
+    <div class="card-top">
+      <ion-card-title>{{ titulo }}</ion-card-title>
+      <span class="stat-icon"><ion-icon [name]="icono" aria-hidden="true"></ion-icon></span>
+    </div>
   </ion-card-header>
   <ion-card-content>
     <h2>{{ cantidad }}</h2>

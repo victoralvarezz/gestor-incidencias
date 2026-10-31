@@ -17,11 +17,11 @@
     </div>
 
     <div class="estadisticas-grid" aria-label="Estadísticas de incidencias">
-      <app-tarjeta-resumen titulo="Total" [cantidad]="servicio.total()"
+      <app-tarjeta-resumen titulo="Total" icono="layers-outline" [cantidad]="servicio.total()"
         (pulsada)="verIncidencias()"></app-tarjeta-resumen>
-      <app-tarjeta-resumen titulo="Pendientes" [cantidad]="servicio.pendientes()"
+      <app-tarjeta-resumen titulo="Pendientes" icono="time-outline" [cantidad]="servicio.pendientes()"
         (pulsada)="verIncidencias()"></app-tarjeta-resumen>
-      <app-tarjeta-resumen titulo="Resueltas" [cantidad]="servicio.resueltas()"
+      <app-tarjeta-resumen titulo="Resueltas" icono="checkmark-circle-outline" [cantidad]="servicio.resueltas()"
         (pulsada)="verIncidencias()"></app-tarjeta-resumen>
     </div>
 

@@ -49,15 +49,23 @@
       <span class="contador" role="status">{{ incidenciasFiltradas().length }} de {{ servicio.total() }} incidencias</span>
     </div>
 
-    <ion-list class="lista-incidencias">
-      @for (incidencia of incidenciasFiltradas(); track incidencia.id) {
-        <app-incidencia-item [incidencia]="incidencia" [puedeCambiarEstado]="auth.esAdministrador()"
-          (estadoCambiado)="cambiarEstado(incidencia, $event)"></app-incidencia-item>
-      }
-
-      @if (incidenciasFiltradas().length === 0) {
-        <p class="sin-resultados">No hay incidencias con estos filtros.</p>
-      }
-    </ion-list>
+    @if (incidenciasFiltradas().length) {
+      <div class="tabla-incidencias" role="table" aria-label="Listado de incidencias">
+        <div class="tabla-cabecera" role="row">
+          <span role="columnheader">ID</span>
+          <span role="columnheader">Incidencia</span>
+          <span role="columnheader">Prioridad</span>
+          <span role="columnheader">Estado</span>
+          <span role="columnheader">Acción</span>
+        </div>
+        @for (incidencia of incidenciasFiltradas(); track incidencia.id) {
+          <app-incidencia-item role="row" [incidencia]="incidencia"
+            [puedeCambiarEstado]="auth.esAdministrador()"
+            (estadoCambiado)="cambiarEstado(incidencia, $event)"></app-incidencia-item>
+        }
+      </div>
+    } @else {
+      <p class="sin-resultados">No hay incidencias con estos filtros.</p>
+    }
   </main>
 </ion-content>
