@@ -1,55 +1,63 @@
-
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar>
     <ion-buttons slot="start"><ion-menu-button></ion-menu-button></ion-buttons>
     <ion-title>Incidencias</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
+<ion-content>
+  <main class="listado-shell">
+    <div class="encabezado">
+      <span class="eyebrow">REGISTRO DE SERVICIO</span>
+      <h1>Listado de incidencias</h1>
+      <p>Consulta el detalle y encuentra lo que necesita atención.</p>
+    </div>
 
-  <h1>Listado de incidencias</h1>
+    <section class="filtros-panel" aria-labelledby="titulo-filtros">
+      <div class="filtros-encabezado">
+        <h2 id="titulo-filtros">Buscar y filtrar</h2>
+        <span>Acota la lista por estado o prioridad</span>
+      </div>
+      <div class="filtros">
+        <ion-item lines="none">
+          <ion-input label="Buscar" labelPlacement="stacked" placeholder="Título o descripción"
+            [value]="busqueda()" (ionInput)="busqueda.set($any($event.detail.value) || '')"></ion-input>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-select label="Estado" labelPlacement="stacked" [value]="filtroEstado()"
+            (ionChange)="filtroEstado.set($event.detail.value)">
+            <ion-select-option value="Todos">Todos</ion-select-option>
+            <ion-select-option value="Pendiente">Pendiente</ion-select-option>
+            <ion-select-option value="En proceso">En proceso</ion-select-option>
+            <ion-select-option value="Resuelta">Resuelta</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-select label="Prioridad" labelPlacement="stacked" [value]="filtroPrioridad()"
+            (ionChange)="filtroPrioridad.set($event.detail.value)">
+            <ion-select-option value="Todas">Todas</ion-select-option>
+            <ion-select-option value="Baja">Baja</ion-select-option>
+            <ion-select-option value="Media">Media</ion-select-option>
+            <ion-select-option value="Alta">Alta</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </div>
+    </section>
 
-  <div class="filtros">
-    <ion-item>
-      <ion-input label="Buscar" labelPlacement="stacked" placeholder="Título o descripción"
-        [value]="busqueda()" (ionInput)="busqueda.set($any($event.detail.value) || '')"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-select label="Estado" labelPlacement="stacked" [value]="filtroEstado()"
-        (ionChange)="filtroEstado.set($event.detail.value)">
-        <ion-select-option value="Todos">Todos</ion-select-option>
-        <ion-select-option value="Pendiente">Pendiente</ion-select-option>
-        <ion-select-option value="En proceso">En proceso</ion-select-option>
-        <ion-select-option value="Resuelta">Resuelta</ion-select-option>
-      </ion-select>
-    </ion-item>
-    <ion-item>
-      <ion-select label="Prioridad" labelPlacement="stacked" [value]="filtroPrioridad()"
-        (ionChange)="filtroPrioridad.set($event.detail.value)">
-        <ion-select-option value="Todas">Todas</ion-select-option>
-        <ion-select-option value="Baja">Baja</ion-select-option>
-        <ion-select-option value="Media">Media</ion-select-option>
-        <ion-select-option value="Alta">Alta</ion-select-option>
-      </ion-select>
-    </ion-item>
-  </div>
+    <div class="resultados-encabezado">
+      <h2>Incidencias registradas</h2>
+      <span class="contador" role="status">{{ incidenciasFiltradas().length }} de {{ servicio.total() }} incidencias</span>
+    </div>
 
-  <p role="status">{{ incidenciasFiltradas().length }} de {{ servicio.total() }} incidencias</p>
+    <ion-list class="lista-incidencias">
+      @for (incidencia of incidenciasFiltradas(); track incidencia.id) {
+        <app-incidencia-item [incidencia]="incidencia" [puedeCambiarEstado]="auth.esAdministrador()"
+          (estadoCambiado)="cambiarEstado(incidencia, $event)"></app-incidencia-item>
+      }
 
-  <ion-list>
-
-    @for (incidencia of incidenciasFiltradas(); track incidencia.id) {
-
-      <app-incidencia-item [incidencia]="incidencia" [puedeCambiarEstado]="auth.esAdministrador()"
-        (estadoCambiado)="cambiarEstado(incidencia, $event)"></app-incidencia-item>
-
-    }
-
-    @if (incidenciasFiltradas().length === 0) {
-      <p class="sin-resultados">No hay incidencias con estos filtros.</p>
-    }
-
-  </ion-list>
-
+      @if (incidenciasFiltradas().length === 0) {
+        <p class="sin-resultados">No hay incidencias con estos filtros.</p>
+      }
+    </ion-list>
+  </main>
 </ion-content>

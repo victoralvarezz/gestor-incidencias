@@ -1,93 +1,103 @@
-
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar>
     <ion-buttons slot="start"><ion-menu-button></ion-menu-button></ion-buttons>
     <ion-title>Panel de control</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-
-  <h1>Resumen de incidencias</h1>
-  <p>Consulta el estado general de las incidencias.</p>
-
-  <ion-grid>
-    <ion-row>
-
-      <ion-col size="12" sizeMd="4">
-        <app-tarjeta-resumen titulo="Total" [cantidad]="servicio.total()"
-          (pulsada)="verIncidencias()"></app-tarjeta-resumen>
-      </ion-col>
-
-      <ion-col size="12" sizeMd="4">
-        <app-tarjeta-resumen titulo="Pendientes" [cantidad]="servicio.pendientes()"
-          (pulsada)="verIncidencias()"></app-tarjeta-resumen>
-      </ion-col>
-
-      <ion-col size="12" sizeMd="4">
-        <app-tarjeta-resumen titulo="Resueltas" [cantidad]="servicio.resueltas()"
-          (pulsada)="verIncidencias()"></app-tarjeta-resumen>
-      </ion-col>
-
-    </ion-row>
-  </ion-grid>
-
-  <section class="grafico" aria-label="Gráfico de incidencias por estado">
-    <h2>Incidencias por estado</h2>
-    @for (barra of grafico(); track barra.estado) {
-      <div class="fila-grafico">
-        <span>{{ barra.estado }}</span>
-        <div class="pista">
-          <div class="barra" [class.en-proceso]="barra.estado === 'En proceso'"
-            [class.resuelta]="barra.estado === 'Resuelta'"
-            [style.width.%]="barra.porcentaje"></div>
-        </div>
-        <strong>{{ barra.cantidad }}</strong>
+<ion-content class="dashboard-content">
+  <main class="dashboard-shell">
+    <div class="encabezado">
+      <div>
+        <span class="eyebrow">VISTA GENERAL</span>
+        <h1>Resumen de incidencias</h1>
+        <p>El estado del servicio, de un vistazo.</p>
       </div>
-    }
-  </section>
+      <span class="actualizacion">Datos actualizados al momento</span>
+    </div>
 
-  <div class="acciones">
-    <ion-button (click)="exportarCsv()">Descargar CSV</ion-button>
-    <ion-button (click)="abrirInforme()">Informe PDF</ion-button>
-  </div>
-  @if (errorInforme()) {
-    <p class="aviso-informe" role="alert">El navegador ha bloqueado el informe. Permite las ventanas emergentes y vuelve a intentarlo.</p>
-  }
+    <div class="estadisticas-grid" aria-label="Estadísticas de incidencias">
+      <app-tarjeta-resumen titulo="Total" [cantidad]="servicio.total()"
+        (pulsada)="verIncidencias()"></app-tarjeta-resumen>
+      <app-tarjeta-resumen titulo="Pendientes" [cantidad]="servicio.pendientes()"
+        (pulsada)="verIncidencias()"></app-tarjeta-resumen>
+      <app-tarjeta-resumen titulo="Resueltas" [cantidad]="servicio.resueltas()"
+        (pulsada)="verIncidencias()"></app-tarjeta-resumen>
+    </div>
 
-  <section class="fuentes-demo" aria-labelledby="titulo-fuentes">
-    <h2 id="titulo-fuentes">Fuentes de datos de demostración</h2>
-    <p>Ejemplo simulado: se cargan dos archivos JSON de forma asíncrona. No hay servidor SQL ni base de datos NoSQL real.</p>
-    <ion-button (click)="cargarFuentesDemo()" [disabled]="cargandoDemo()">
-      Cargar fuentes simuladas
-    </ion-button>
-    @if (cargandoDemo()) {
-      <p role="status">Cargando datos…</p>
-    }
-    @if (errorDemo()) {
-      <p role="alert">{{ errorDemo() }}</p>
-    }
-    @if (filasDemo().length || documentosDemo().length) {
-      <div class="fuentes-grid" role="status">
-        <div>
-          <h3>SQL/REST simulado: filas</h3>
-          <ul>
-            @for (fila of filasDemo(); track fila.id) {
-              <li>#{{ fila.id }} {{ fila.titulo }}: {{ fila.estado }}</li>
+    <div class="paneles-grid">
+      <section class="panel grafico" aria-labelledby="titulo-estados">
+        <span class="eyebrow">DISTRIBUCIÓN</span>
+        <h2 id="titulo-estados">Incidencias por estado</h2>
+        <div class="grafico-contenido">
+          <div class="donut" [style.background]="fondoDonut()" aria-hidden="true">
+            <div class="donut-centro">
+              <strong>{{ servicio.total() }}</strong>
+              <span>en total</span>
+            </div>
+          </div>
+          <ul class="leyenda">
+            @for (estado of grafico(); track estado.estado) {
+              <li>
+                <span class="punto" [class.pendiente]="estado.estado === 'Pendiente'"
+                  [class.proceso]="estado.estado === 'En proceso'"
+                  [class.resuelta]="estado.estado === 'Resuelta'"></span>
+                <span>{{ estado.estado }}</span>
+                <strong>{{ estado.cantidad }}</strong>
+              </li>
             }
           </ul>
         </div>
-        <div>
-          <h3>NoSQL simulado: documentos</h3>
-          <ul>
-            @for (documento of documentosDemo(); track documento.id) {
-              <li>{{ documento.equipo }} · {{ documento.ubicacion.edificio }}, {{ documento.ubicacion.aula }}
-                ({{ documento.etiquetas.join(', ') }})</li>
-            }
-          </ul>
-        </div>
-      </div>
-    }
-  </section>
+      </section>
 
+      <section class="panel exportaciones" aria-labelledby="titulo-exportar">
+        <span class="eyebrow">INFORMES</span>
+        <h2 id="titulo-exportar">Exportar incidencias</h2>
+        <p>Descarga la lista actual o prepara un informe para imprimir y guardar como PDF.</p>
+        <div class="acciones">
+          <ion-button (click)="exportarCsv()">Descargar CSV</ion-button>
+          <ion-button fill="outline" (click)="abrirInforme()">Informe PDF</ion-button>
+        </div>
+        @if (errorInforme()) {
+          <p class="aviso-informe" role="alert">El navegador ha bloqueado el informe. Permite las ventanas emergentes y vuelve a intentarlo.</p>
+        }
+      </section>
+    </div>
+
+    <section class="panel fuentes-demo" aria-labelledby="titulo-fuentes">
+      <span class="eyebrow">DATOS DE DEMOSTRACIÓN</span>
+      <h2 id="titulo-fuentes">Fuentes simuladas</h2>
+      <p>Dos archivos JSON locales representan filas SQL/REST y documentos NoSQL. No hay conexión a bases de datos reales.</p>
+      <ion-button fill="outline" (click)="cargarFuentesDemo()" [disabled]="cargandoDemo()">
+        Cargar fuentes simuladas
+      </ion-button>
+      @if (cargandoDemo()) {
+        <p role="status">Cargando datos…</p>
+      }
+      @if (errorDemo()) {
+        <p role="alert">{{ errorDemo() }}</p>
+      }
+      @if (filasDemo().length || documentosDemo().length) {
+        <div class="fuentes-grid" role="status">
+          <div>
+            <h3>SQL/REST simulado: filas</h3>
+            <ul>
+              @for (fila of filasDemo(); track fila.id) {
+                <li>#{{ fila.id }} {{ fila.titulo }}: {{ fila.estado }}</li>
+              }
+            </ul>
+          </div>
+          <div>
+            <h3>NoSQL simulado: documentos</h3>
+            <ul>
+              @for (documento of documentosDemo(); track documento.id) {
+                <li>{{ documento.equipo }} · {{ documento.ubicacion.edificio }}, {{ documento.ubicacion.aula }}
+                  ({{ documento.etiquetas.join(', ') }})</li>
+              }
+            </ul>
+          </div>
+        </div>
+      }
+    </section>
+  </main>
 </ion-content>

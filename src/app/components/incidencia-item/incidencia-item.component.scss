@@ -1,24 +1,20 @@
-.estado {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
+ion-item { --background: #fff; --padding-start: 20px; --inner-padding-end: 20px; --min-height: 130px; border: 1px solid #e6eafa; border-radius: 16px; box-shadow: 0 8px 25px rgba(28, 48, 111, .045); }
+ion-label { min-width: 0; white-space: normal; margin: 18px 0; }
+.referencia { color: #7b88aa; font-size: 10px; font-weight: 800; letter-spacing: .12em; }
+h2 { color: #1d2d59; font-size: 17px; font-weight: 750; margin: 7px 0 5px; overflow-wrap: anywhere; }
+.descripcion { color: #687592; line-height: 1.45; margin: 0 0 12px; overflow-wrap: anywhere; }
+.prioridad { display: inline-block; color: #54716b; background: #eaf6f1; border-radius: 999px; padding: 5px 9px; font-size: 11px; font-weight: 750; }
+.prioridad.media { color: #6c5c9d; background: #f0ecfb; }
+.prioridad.alta { color: #a05258; background: #fff0f0; }
+.estado { display: flex; flex-direction: column; align-items: end; gap: 12px; padding: 14px 0; }
+.estado ion-badge { border-radius: 999px; padding: 7px 10px; font-weight: 700; }
+.estado ion-badge.pendiente { --background: #eaf0ff; --color: #3c5fce; }
+.estado ion-badge.proceso { --background: #f0ecfb; --color: #725bb7; }
+.estado ion-badge.resuelta { --background: #e8f7f2; --color: #268575; }
+.estado ion-select { min-width: 126px; font-size: 12px; color: #3f5fc3; border: 1px solid #dfe6f7; border-radius: 9px; padding: 0 8px; }
 
-ion-label {
-  min-width: 0;
-  white-space: normal;
-}
-
-ion-label p,
-ion-label h2 {
-  overflow-wrap: anywhere;
-}
-
-@media (max-width: 650px) {
-  .estado {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 2px;
-    max-width: 115px;
-  }
+@media (max-width: 620px) {
+  ion-item { --padding-start: 16px; --inner-padding-end: 16px; }
+  .estado { max-width: 110px; align-items: start; }
+  .estado ion-select { min-width: 100px; }
 }

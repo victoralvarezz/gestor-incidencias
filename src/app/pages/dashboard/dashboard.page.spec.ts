@@ -34,13 +34,16 @@ describe('DashboardPage', () => {
 
   it('actualiza el gráfico al cambiar el estado de una incidencia', () => {
     const servicio = TestBed.inject(IncidenciasService);
-    expect(component.grafico().map(barra => barra.cantidad)).toEqual([1, 1, 1]);
+    expect(component.grafico().map(estado => estado.cantidad)).toEqual([1, 1, 1]);
+    const fondoInicial = component.fondoDonut();
 
     servicio.cambiarEstado(1, 'Resuelta');
     fixture.detectChanges();
 
-    expect(component.grafico().map(barra => barra.cantidad)).toEqual([0, 1, 2]);
+    expect(component.grafico().map(estado => estado.cantidad)).toEqual([0, 1, 2]);
     expect(fixture.nativeElement.querySelector('.grafico').textContent).toContain('Resuelta');
+    expect(component.fondoDonut()).not.toBe(fondoInicial);
+    expect(fixture.nativeElement.querySelector('.donut')).toBeTruthy();
   });
 
   it('solo exporta cuando el usuario es administrador', () => {

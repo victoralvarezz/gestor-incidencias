@@ -1,4 +1,4 @@
-<ion-card>
+<ion-card [class.pendientes]="titulo === 'Pendientes'" [class.resueltas]="titulo === 'Resueltas'">
   <ion-card-header>
     <ion-card-title>{{ titulo }}</ion-card-title>
   </ion-card-header>

@@ -1,12 +1,16 @@
-<ion-item>
+<ion-item lines="none">
   <ion-label>
+    <span class="referencia">INCIDENCIA #{{ incidencia.id }}</span>
     <h2>{{ incidencia.titulo }}</h2>
-    <p>{{ incidencia.descripcion }}</p>
-    <p>Prioridad: {{ incidencia.prioridad }}</p>
+    <p class="descripcion">{{ incidencia.descripcion }}</p>
+    <span class="prioridad" [class.alta]="incidencia.prioridad === 'Alta'"
+      [class.media]="incidencia.prioridad === 'Media'">Prioridad {{ incidencia.prioridad }}</span>
   </ion-label>
 
   <div slot="end" class="estado">
-    <ion-badge [color]="incidencia.estado === 'Resuelta' ? 'success' : incidencia.estado === 'En proceso' ? 'primary' : 'warning'">
+    <ion-badge [class.pendiente]="incidencia.estado === 'Pendiente'"
+      [class.proceso]="incidencia.estado === 'En proceso'"
+      [class.resuelta]="incidencia.estado === 'Resuelta'">
       {{ incidencia.estado }}
     </ion-badge>
     @if (puedeCambiarEstado) {

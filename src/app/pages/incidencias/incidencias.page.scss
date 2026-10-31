@@ -1,42 +1,30 @@
-ion-content {
-  --background: #f4f7fb;
+ion-content { --background: #f5f7fd; }
+.listado-shell { max-width: 1180px; margin: 0 auto; padding: 34px 28px 56px; }
+.eyebrow { color: #6673ad; font-size: 11px; font-weight: 800; letter-spacing: .14em; }
+h1 { color: #172653; font-size: clamp(28px, 3vw, 38px); letter-spacing: -.04em; margin: 8px 0; }
+h2 { color: #24345f; font-size: 17px; margin: 0; }
+.encabezado { margin-bottom: 28px; }
+.encabezado p { color: #64708d; margin: 0; }
+.filtros-panel { background: #fff; border: 1px solid #e6eafa; border-radius: 20px; padding: 23px; box-shadow: 0 14px 36px rgba(28, 48, 111, .055); }
+.filtros-encabezado { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 18px; }
+.filtros-encabezado span { color: #8a94aa; font-size: 12px; }
+.filtros { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 12px; }
+.filtros ion-item { --background: #f7f8fd; --padding-start: 14px; --inner-padding-end: 14px; --min-height: 66px; border: 1px solid #e4e9f6; border-radius: 12px; }
+.filtros ion-item:focus-within { border-color: #5371e3; box-shadow: 0 0 0 3px rgba(83, 113, 227, .1); }
+.resultados-encabezado { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin: 30px 0 16px; }
+.contador { color: #4965c5; background: #eaf0ff; border: 1px solid #dce6ff; border-radius: 999px; padding: 8px 12px; font-size: 12px; font-weight: 750; white-space: nowrap; }
+.lista-incidencias { background: transparent; padding: 0; display: grid; gap: 12px; }
+.sin-resultados { background: #fff; border: 1px dashed #cfd8ef; border-radius: 16px; color: #64708d; padding: 35px; text-align: center; margin: 0; }
+
+@media (max-width: 800px) {
+  .filtros { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .filtros ion-item:first-child { grid-column: 1 / -1; }
 }
-
-h1, .filtros, ion-list, p {
-  max-width: 1050px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.filtros {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  gap: 12px;
-  margin-bottom: 16px;
-
-  ion-item {
-    --background: white;
-    border-radius: 8px;
-  }
-}
-
-.sin-resultados {
-  padding: 20px;
-  text-align: center;
-}
-
-@media (max-width: 650px) {
-  .filtros {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (min-width: 651px) and (max-width: 900px) {
-  .filtros {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .filtros ion-item:first-child {
-    grid-column: 1 / -1;
-  }
+@media (max-width: 620px) {
+  .listado-shell { padding: 24px 16px 40px; }
+  .filtros-panel { padding: 18px; }
+  .filtros-encabezado span { display: none; }
+  .filtros { grid-template-columns: 1fr; }
+  .filtros ion-item:first-child { grid-column: auto; }
+  .resultados-encabezado { align-items: start; flex-direction: column; }
 }

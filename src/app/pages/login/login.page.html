@@ -1,37 +1,49 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>Iniciar sesión</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content class="login-content">
+  <main class="login-shell">
+    <section class="login-brand" aria-labelledby="marca-titulo">
+      <div class="brand-top">
+        <span class="brand-mark" aria-hidden="true">GI</span>
+        <span id="marca-titulo">Gestor de incidencias</span>
+      </div>
+      <div class="brand-message">
+        <span class="brand-eyebrow">UN ESPACIO PARA RESOLVER</span>
+        <h2>Todo lo que importa, en orden.</h2>
+        <p>Consulta, registra y sigue cada incidencia con una vista clara para tu equipo.</p>
+      </div>
+      <p class="brand-foot">Gestión sencilla · Seguimiento claro</p>
+    </section>
 
-<ion-content class="ion-padding">
-  <div class="contenedor">
-    <h1>Gestor de incidencias</h1>
-    <p>Accede para consultar y registrar incidencias.</p>
+    <section class="login-panel" aria-labelledby="login-titulo">
+      <div class="formulario-wrap">
+        <span class="eyebrow">ACCESO A LA PLATAFORMA</span>
+        <h1 id="login-titulo">Bienvenido de nuevo</h1>
+        <p class="intro">Introduce tus credenciales para continuar.</p>
 
-    <form [formGroup]="formulario" (ngSubmit)="entrar()">
-      <ion-item>
-        <ion-input label="Usuario" labelPlacement="stacked" autocomplete="username" formControlName="usuario"
-          [attr.aria-invalid]="formulario.controls.usuario.touched && formulario.controls.usuario.invalid"></ion-input>
-      </ion-item>
-      @if (formulario.controls.usuario.touched && formulario.controls.usuario.invalid) {
-        <ion-note color="danger" role="alert">Introduce el usuario.</ion-note>
-      }
+        <form [formGroup]="formulario" (ngSubmit)="entrar()">
+          <ion-item class="campo" lines="none">
+            <ion-input label="Usuario" labelPlacement="stacked" autocomplete="username" formControlName="usuario"
+              [attr.aria-invalid]="formulario.controls.usuario.touched && formulario.controls.usuario.invalid"></ion-input>
+          </ion-item>
+          @if (formulario.controls.usuario.touched && formulario.controls.usuario.invalid) {
+            <ion-note color="danger" role="alert">Introduce el usuario.</ion-note>
+          }
 
-      <ion-item>
-        <ion-input label="Contraseña" labelPlacement="stacked" type="password" autocomplete="current-password" formControlName="contrasena"
-          [attr.aria-invalid]="formulario.controls.contrasena.touched && formulario.controls.contrasena.invalid"></ion-input>
-      </ion-item>
-      @if (formulario.controls.contrasena.touched && formulario.controls.contrasena.invalid) {
-        <ion-note color="danger" role="alert">Introduce la contraseña.</ion-note>
-      }
+          <ion-item class="campo" lines="none">
+            <ion-input label="Contraseña" labelPlacement="stacked" type="password" autocomplete="current-password" formControlName="contrasena"
+              [attr.aria-invalid]="formulario.controls.contrasena.touched && formulario.controls.contrasena.invalid"></ion-input>
+          </ion-item>
+          @if (formulario.controls.contrasena.touched && formulario.controls.contrasena.invalid) {
+            <ion-note color="danger" role="alert">Introduce la contraseña.</ion-note>
+          }
 
-      @if (error()) {
-        <ion-note color="danger" role="alert">Usuario o contraseña incorrectos.</ion-note>
-      }
+          @if (error()) {
+            <ion-note color="danger" role="alert">Usuario o contraseña incorrectos.</ion-note>
+          }
 
-      <ion-button type="submit" expand="block">Entrar</ion-button>
-    </form>
-
-  </div>
+          <ion-button class="entrar" type="submit" expand="block">Entrar</ion-button>
+        </form>
+        <p class="pie">Acceso de demostración para la actividad académica.</p>
+      </div>
+    </section>
+  </main>
 </ion-content>

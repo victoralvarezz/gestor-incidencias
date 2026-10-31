@@ -74,11 +74,12 @@ bases de datos.
 
 ## Diseño y despliegue
 
-Ionic proporciona los controles, el menú y la cuadrícula del resumen. Las hojas
+Ionic proporciona los controles y el menú; CSS Grid ordena el resumen. Las hojas
 SCSS ajustan formularios, filtros, botones y fuentes simuladas a pantallas
 estrechas. Los campos tienen etiquetas; los avisos usan `role="alert"` o
-`role="status"`, y el foco visible tiene un contorno global. El gráfico de
-barras usa HTML y CSS y muestra también la cantidad en texto.
+`role="status"`, y el foco visible tiene un contorno global. El pequeño gráfico
+circular usa CSS y los estados reales del Signal; la leyenda muestra también
+la cantidad en texto.
 
 `angular.json` deja la salida en `www`; `vercel.json` configura ese directorio,
 el comando de compilación y las rutas de la aplicación. Antes de entregar hay

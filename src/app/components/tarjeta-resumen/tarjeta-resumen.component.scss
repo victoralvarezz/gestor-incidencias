@@ -1,9 +1,9 @@
-ion-card {
-  border-radius: 12px;
-}
-
-h2 {
-  font-size: 32px;
-  font-weight: bold;
-  color: #2563eb;
-}
+:host { display: block; height: 100%; }
+ion-card { height: 100%; margin: 0; border: 1px solid #e3e9fb; border-top: 4px solid #4f6fe9; border-radius: 18px; box-shadow: 0 14px 36px rgba(28, 48, 111, .075); background: #fff; }
+ion-card.pendientes { border-top-color: #a995e8; }
+ion-card.resueltas { border-top-color: #57b7aa; }
+ion-card-header { padding: 20px 22px 0; }
+ion-card-title { color: #65718e; font-size: 13px; font-weight: 750; }
+ion-card-content { padding: 4px 22px 17px; }
+h2 { color: #192956; font-size: 46px; font-weight: 780; letter-spacing: -.055em; line-height: 1; margin: 10px 0 9px; }
+ion-button { --padding-start: 0; --padding-end: 0; height: 27px; margin: 0; font-size: 12px; font-weight: 700; }

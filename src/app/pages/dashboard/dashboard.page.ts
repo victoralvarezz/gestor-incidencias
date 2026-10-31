@@ -6,9 +6,6 @@ import {
   IonToolbar,
   IonTitle,
   IonContent,
-  IonGrid,
-  IonRow,
-  IonCol,
   IonButton,
   IonButtons,
   IonMenuButton
@@ -29,9 +26,6 @@ import { DocumentoNoSqlDemo, FilaSqlDemo, FuentesDemoService } from '../../servi
     IonToolbar,
     IonTitle,
     IonContent,
-    IonGrid,
-    IonRow,
-    IonCol,
     IonButton,
     TarjetaResumenComponent,
     IonButtons,
@@ -64,6 +58,14 @@ export class DashboardPage {
         porcentaje: incidencias.length ? cantidad * 100 / incidencias.length : 0
       };
     });
+  });
+
+  readonly fondoDonut = computed(() => {
+    if (!this.servicio.total()) return '#e8edfa';
+    const [pendientes, enProceso] = this.grafico();
+    const cortePendientes = pendientes.porcentaje;
+    const corteProceso = cortePendientes + enProceso.porcentaje;
+    return `conic-gradient(#4f6fe9 0 ${cortePendientes}%, #a995e8 ${cortePendientes}% ${corteProceso}%, #57b7aa ${corteProceso}% 100%)`;
   });
 
   verIncidencias(): void {

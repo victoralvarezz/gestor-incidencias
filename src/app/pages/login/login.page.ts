@@ -4,12 +4,9 @@ import { Router } from '@angular/router';
 import {
   IonButton,
   IonContent,
-  IonHeader,
   IonInput,
   IonItem,
   IonNote,
-  IonTitle,
-  IonToolbar
 } from '@ionic/angular';
 import { AuthService } from '../../services/auth.service';
 
@@ -21,12 +18,9 @@ import { AuthService } from '../../services/auth.service';
     ReactiveFormsModule,
     IonButton,
     IonContent,
-    IonHeader,
     IonInput,
     IonItem,
     IonNote,
-    IonTitle,
-    IonToolbar
   ]
 })
 export class LoginPage {

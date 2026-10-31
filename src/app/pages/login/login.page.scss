@@ -1,29 +1,31 @@
-.contenedor {
-  max-width: 420px;
-  margin: 60px auto;
-}
+ion-content { --background: #f5f7fd; }
+.login-shell { min-height: 100%; max-width: 1440px; margin: auto; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); background: #fff; }
+.login-brand { position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; padding: clamp(28px, 5vw, 68px); color: #fff; background: linear-gradient(145deg, #172d72 4%, #375bd1 65%, #7368c8); }
+.login-brand::after { content: ''; position: absolute; width: 420px; height: 420px; right: -210px; bottom: -180px; border-radius: 50%; background: rgba(255, 255, 255, .08); pointer-events: none; }
+.brand-top { display: flex; align-items: center; gap: 12px; font-weight: 750; letter-spacing: -.02em; }
+.brand-mark { width: 42px; height: 42px; display: grid; place-items: center; border-radius: 12px; background: rgba(255, 255, 255, .18); border: 1px solid rgba(255, 255, 255, .25); font-size: 14px; letter-spacing: .04em; }
+.brand-message { position: relative; z-index: 1; max-width: 520px; }
+.brand-eyebrow { color: #dddafa; font-size: 11px; font-weight: 800; letter-spacing: .16em; }
+.brand-message h2 { font-size: clamp(38px, 4.4vw, 62px); line-height: 1.08; letter-spacing: -.055em; margin: 18px 0 22px; font-weight: 760; }
+.brand-message p { max-width: 410px; color: #e2e8ff; font-size: 16px; line-height: 1.7; margin: 0; }
+.brand-foot { position: relative; z-index: 1; color: #d7e0ff; font-size: 12px; margin: 0; }
+.login-panel { display: grid; place-items: center; padding: 40px 28px; }
+.formulario-wrap { width: min(100%, 430px); }
+.eyebrow { color: #6575bb; font-size: 11px; font-weight: 800; letter-spacing: .14em; }
+h1 { color: #172653; font-size: clamp(30px, 3vw, 40px); letter-spacing: -.045em; line-height: 1.15; margin: 12px 0 10px; }
+.intro { color: #687592; margin: 0 0 32px; line-height: 1.5; }
+form { display: grid; gap: 14px; }
+.campo { --background: #f7f8fd; --padding-start: 16px; --inner-padding-end: 16px; --min-height: 68px; border: 1px solid #e2e7f5; border-radius: 12px; }
+.campo:focus-within { border-color: #5371e3; box-shadow: 0 0 0 3px rgba(83, 113, 227, .12); }
+ion-note { display: block; margin: -6px 4px 0; font-size: 13px; }
+.entrar { --border-radius: 12px; height: 50px; margin: 8px 0 0; font-weight: 700; }
+.pie { color: #8a94aa; font-size: 12px; margin: 25px 0 0; text-align: center; }
 
-form {
-  padding: 24px;
-  border-radius: 12px;
-  background: var(--ion-card-background, #fff);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-}
-
-ion-note {
-  display: block;
-  margin: 8px 12px;
-}
-
-ion-button {
-  margin-top: 20px;
-}
-
-.ayuda {
-  margin-top: 20px;
-}
-
-@media (max-width: 600px) {
-  .contenedor { margin: 16px auto; }
-  form { padding: 16px; }
+@media (max-width: 760px) {
+  .login-shell { grid-template-columns: 1fr; }
+  .login-brand { min-height: 260px; gap: 28px; padding: 28px 24px; }
+  .brand-message h2 { font-size: 34px; margin: 10px 0; }
+  .brand-message p { font-size: 14px; }
+  .brand-foot { display: none; }
+  .login-panel { padding: 38px 24px 50px; }
 }
